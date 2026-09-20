@@ -6,8 +6,8 @@ Thời điểm đối chiếu: 20/09/2026 (Asia/Ho_Chi_Minh)
 
 Audit đúng về các yêu cầu Springer và đúng về các số RQ1 đang được trình bày trong `trace-paper.tex`. Tuy nhiên, hai điểm trong audit cần hiệu chỉnh:
 
-1. Abstract trước khi sửa có khoảng 313 từ theo phép đếm trực tiếp từ source, không phải 338 từ. Dù vậy, nó vẫn vượt giới hạn 150--250 từ của journal.
-2. Hai ledger RQ1 và các report cũ mà audit viện dẫn không có trong repository hoặc workspace hiện tại. Vì vậy, các SHA-256, trạng thái `complete`, raw paired deltas, số non-zero differences và mâu thuẫn giữa các report chưa thể được xác minh độc lập trong lần kiểm tra này.
+1. Số từ abstract phụ thuộc quy tắc tokenizer: bản trước sửa có 313 từ khi giữ cụm gạch nối như một từ và 338 từ khi tách các thành phần của cụm; cả hai cách đếm đều vượt giới hạn 150--250 từ. Bản đã sửa có kết quả tương ứng là 218 và 242 từ, đều nằm trong giới hạn.
+2. Hai ledger RQ1 và các report cũ mà audit viện dẫn không có trong repository `TRACE-Paper` và không tồn tại tại các đường dẫn được nêu trên máy đang thực hiện lần kiểm tra này. Dũng báo rằng chúng có trong workspace của Dũng; do khác biệt môi trường, các SHA-256, trạng thái `complete`, raw paired deltas, số non-zero differences và mâu thuẫn giữa các report vẫn chưa thể được xác minh độc lập ở đây.
 
 ## Những nhận định đã xác minh là đúng
 
@@ -23,7 +23,7 @@ Audit đúng về các yêu cầu Springer và đúng về các số RQ1 đang �
 
 - Chuyển document class sang `pdflatex,sn-basic,Numbered,iicol`.
 - Bổ sung `sn-basic.bst` ở thư mục gốc để build tái lập được.
-- Rút abstract xuống 218 từ và giảm keywords từ 7 xuống 6.
+- Rút abstract xuống 218 từ theo quy tắc giữ cụm gạch nối, hoặc 242 từ theo quy tắc tách cụm; giảm keywords từ 7 xuống 6.
 - Giữ claim RQ1 thận trọng: nhấn mạnh end-to-end reliability, conditional benefit rõ ở Gemini nhưng yếu/không ổn định ở DeepSeek, cùng chi phí token khoảng 2.03 lần.
 - Đổi toàn bộ chín bảng sang float hai cột, thêm dẫn chiếu trong văn bản cho từng bảng và thêm chú thích trực tiếp về quy tắc end-to-end/zero/N/A ở Table 1.
 - Chuẩn hóa dấu thập phân trong các bảng RQ1 và RQ2.
@@ -43,7 +43,7 @@ Audit đúng về các yêu cầu Springer và đúng về các số RQ1 đang �
 
 - Cần tác giả cung cấp tên, affiliation, e-mail corresponding author và ORCID nếu có.
 - Cần tác giả phê duyệt nội dung Funding, Competing interests, Data availability, Code availability, Author contributions và Acknowledgements.
-- Cần đưa hai ledger RQ1, report cũ và script/notebook phân tích vào workspace để kiểm tra hash, tạo release manifest, đánh dấu report superseded và bổ sung non-zero differences/raw paired deltas.
+- Cần cung cấp một vị trí versioned và truy cập được cho hai ledger RQ1, report cũ và script/notebook phân tích để kiểm tra hash, tạo release manifest, đánh dấu report superseded và bổ sung non-zero differences/raw paired deltas.
 - Figure 1 vẫn là raster 1536 x 1024; nên thay bằng nguồn vector hoặc artwork có độ phân giải hiệu dụng phù hợp hướng dẫn Springer.
 
 ## Nguồn chính thức

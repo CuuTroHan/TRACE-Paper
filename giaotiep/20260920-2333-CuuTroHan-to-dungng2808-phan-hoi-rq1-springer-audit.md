@@ -6,7 +6,7 @@
 
 ## Kết luận chung
 
-Cảm ơn Dũng đã audit. Phần lớn nhận định về yêu cầu Springer và cách diễn giải thận trọng RQ1 là hợp lý. Tôi đã áp dụng các sửa đổi có thể xác minh trực tiếp từ source, PDF và hướng dẫn chính thức của journal. Một số nhận định chưa được chấp nhận nguyên trạng vì số đếm chưa chính xác, mức độ bắt buộc bị diễn đạt hơi mạnh, hoặc bằng chứng nguồn không có trong repository/workspace hiện tại.
+Cảm ơn Dũng đã audit. Phần lớn nhận định về yêu cầu Springer và cách diễn giải thận trọng RQ1 là hợp lý. Tôi đã áp dụng các sửa đổi có thể xác minh trực tiếp từ source, PDF và hướng dẫn chính thức của journal. Một số nhận định chưa được chấp nhận nguyên trạng vì mức độ bắt buộc bị diễn đạt hơi mạnh hoặc bằng chứng nguồn không có trong repository và không truy cập được trên máy kiểm tra này.
 
 ## Những nội dung đã sửa theo audit
 
@@ -29,7 +29,7 @@ Cảm ơn Dũng đã audit. Phần lớn nhận định về yêu cầu Springer
 
 ### 2. Abstract và keywords
 
-- Rút abstract từ khoảng 313 từ xuống 218 từ, nằm trong giới hạn 150--250 từ.
+- Rút abstract từ 313/338 từ xuống 218/242 từ; hai cặp số tương ứng với quy tắc giữ/tách cụm gạch nối. Bản mới nằm trong giới hạn 150--250 từ theo cả hai quy tắc.
 - Giảm keywords từ 7 xuống 6.
 - Không dùng nguyên văn đoạn RQ1 được đề xuất trong audit vì abstract cần phản ánh đủ cả RQ1, RQ2 và RQ3. Bản mới vẫn giữ claim RQ1 thận trọng, nhưng đồng thời giữ các kết quả chính và caveat của hai RQ còn lại.
 
@@ -62,9 +62,9 @@ Cảm ơn Dũng đã audit. Phần lớn nhận định về yêu cầu Springer
 
 ## Những nhận định chưa hợp lý hoặc chưa thể xác nhận
 
-### 1. Số từ abstract là 338
+### 1. Số từ abstract phụ thuộc quy tắc tokenizer
 
-Nhận định này không khớp source hiện có. Phép đếm trực tiếp phần nằm trong `\abstract{...}` cho kết quả khoảng 313 từ; các tokenizer khác nhau có thể lệch nhẹ nhưng không lên đến 338. Kết luận “vượt 250 từ” vẫn đúng, nên abstract vẫn được rút xuống 218 từ.
+Phản hồi trước đã diễn đạt chưa chính xác khi phủ nhận con số 338. Trích đúng phần nằm trong `\abstract{...}` của commit `4f5250b` cho 313 từ nếu giữ `LLM-based`, `end-to-end` và các cụm gạch nối tương tự như một từ, hoặc 338 từ nếu tách các thành phần chữ/số. Abstract mới tương ứng có 218 hoặc 242 từ. Vì vậy, kết luận chính xác là bản cũ vượt giới hạn và bản mới nằm trong giới hạn dưới cả hai quy tắc; mọi con số cụ thể phải nêu kèm quy tắc tokenizer.
 
 ### 2. Gọi bản cũ là “dùng sai template”
 
@@ -76,18 +76,18 @@ Guidelines dùng từ “recommend” cho `iicol` và nói tác giả LaTeX “c
 
 ### 4. Xác nhận hai ledger frozen và các SHA-256
 
-Trong repository `TRACE-Paper` và toàn bộ workspace hiện tại không có:
+Trong repository `TRACE-Paper` không có các artifact dưới đây. Dũng cho biết chúng tồn tại trong workspace của Dũng, nhưng trên máy đang thực hiện phản hồi này, cả `../experiments`, `../results` lẫn các đường dẫn tương ứng dưới `R:\BaoVer2` đều không tồn tại:
 
 - `experiments/rq1/ledger/RQ1-OFFICIAL-GEMINI-3.7-FLASH/runs.csv`
 - `experiments/rq1/ledger/RQ1-OFFICIAL-V4-DEEPSEEK-FLASH-THINKING/runs.csv`
 - Hai `data-quality-report.json`
 - `results/rq1/reports/RQ1_Hai_Model_Bang_Chung_Manh_Nhat_VI.md`
 
-Vì vậy tôi chỉ xác nhận được rằng các số audit nêu khớp với Table 1, Table 2, Answer to RQ1 và Conclusion trong manuscript. Tôi chưa thể xác nhận độc lập các hash, số dòng raw, cờ `complete`, exact McNemar tái tính từ ledger hoặc mâu thuẫn của report cũ.
+Vì vậy đây là khác biệt workspace, không phải bằng chứng rằng Dũng không có các file. Trên máy này, tôi chỉ xác nhận được rằng các số audit nêu khớp với Table 1, Table 2, Answer to RQ1 và Conclusion trong manuscript. Tôi chưa thể xác nhận độc lập các hash, số dòng raw, cờ `complete`, exact McNemar tái tính từ ledger hoặc mâu thuẫn của report cũ.
 
 ### 5. Tạo release manifest ngay trong lần sửa này
 
-Chưa thể tạo manifest có giá trị kiểm chứng khi thiếu chính các CSV, config, analysis script và report được viện dẫn. Sao chép hash từ audit vào manifest mà không đọc được file nguồn sẽ tạo cảm giác provenance đã được xác minh trong khi thực tế chưa có. Cần đưa các artifact vào workspace/repository hoặc cung cấp đường dẫn truy cập trước.
+Chưa thể tạo manifest có giá trị kiểm chứng trên máy này khi không truy cập được các CSV, config, analysis script và report được viện dẫn. Sao chép hash từ audit vào manifest mà không đọc được file nguồn sẽ tạo cảm giác provenance đã được xác minh trong khi thực tế chưa có. Cần đưa các artifact vào một release/archive versioned có thể truy cập hoặc cung cấp đường dẫn đồng bộ trước.
 
 ### 6. Bổ sung số non-zero differences và raw paired deltas
 
@@ -110,7 +110,7 @@ Chưa thể tạo manifest có giá trị kiểm chứng khi thiếu chính các
 
 ## Thông tin cần Dũng bổ sung
 
-1. Đưa hai ledger RQ1 và `data-quality-report.json` vào repository/workspace hoặc gửi đường dẫn truy cập được.
+1. Công bố hai ledger RQ1 và `data-quality-report.json` tại một vị trí versioned hoặc gửi đường dẫn đồng bộ truy cập được từ máy này.
 2. Gửi analysis script/notebook đã tạo Table 1--2 và conditional analysis.
 3. Xác nhận report nào là canonical, report nào phải gắn nhãn `SUPERSEDED -- DO NOT CITE`.
 4. Xác nhận model ID, provider, temperature và thinking mode của DeepSeek để xử lý tên thư mục `THINKING` nhưng config `disabled`.

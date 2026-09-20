@@ -26,3 +26,18 @@ bibtex trace-paper
 pdflatex trace-paper.tex
 pdflatex trace-paper.tex
 ```
+
+On Windows, the checked build script runs the same sequence, records the
+installed tool versions, rejects blocking LaTeX diagnostics, and prints the
+SHA-256 of the resulting PDF:
+
+```powershell
+.\scripts\build-paper.ps1
+```
+
+The abstract count can be reproduced under both documented tokenization
+conventions:
+
+```powershell
+.\scripts\count-abstract-words.ps1
+```
