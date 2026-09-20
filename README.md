@@ -7,7 +7,14 @@ This repository contains the LaTeX manuscript source, bibliography, styles, figu
 - **Main Paper Manuscript**: [`trace-paper.tex`](trace-paper.tex)
 - **Compiled PDF**: [`trace-paper.pdf`](trace-paper.pdf)
 - **References**: [`trace-references.bib`](trace-references.bib)
-- **Pipeline Architecture Diagram**: `framework-pipeline-blue-v4-compact.png`
+- **Pipeline Architecture Diagram**: [`Fig1.png`](Fig1.png)
+- **Springer bibliography style**: [`sn-basic.bst`](sn-basic.bst)
+
+The manuscript uses the journal-recommended two-column numbered configuration:
+
+```latex
+\documentclass[pdflatex,sn-basic,Numbered,iicol]{sn-jnl}
+```
 
 ## Building the Paper
 

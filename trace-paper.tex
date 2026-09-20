@@ -1,5 +1,5 @@
 % Springer Nature LaTeX template, version 3.1 (December 2024)
-\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}
+\documentclass[pdflatex,sn-basic,Numbered,iicol]{sn-jnl}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -15,6 +15,7 @@
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{tabularx}
+\hypersetup{hypertexnames=false}
 
 \graphicspath{{./}}
 \raggedbottom
@@ -27,9 +28,9 @@
 \author*[1]{\fnm{First} \sur{Author}}\email{author@example.com}
 \affil*[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\city{City}, \country{Country}}}
 
-\abstract{Java unit test generation using large language models (LLMs) still faces limitations in structural planning, controlling the scope of bug fixes, and the reliability of verification decisions. This research proposes TRACE with three contributions: (1) Structural Planning based on AST/CFG to construct atomic scenarios with structural objectives and auditable evidence sources; (2) Traceability-Guided Scenario-Local Repair (TGSLR), maintaining a bidirectional mapping of scenario--test to limit the scope of fixes and perform regression checks before acceptance; (3) Tool-Grounded Specialized Multi-Agent Verification, combining specialized verification roles to detect incorrect acceptances, trace the root cause, and route bug fixes. The three contributions are independently evaluated using three separate datasets. RQ1 uses 150 focal methods from SF110, generating 600 runs with two LLM configurations. PLANNED raised the aggregate execution rate from 58.00\% to 88.33\% and the end-to-end branch coverage from 43.51\% to 70.58\%, with a token volume of about 2.03 times DIRECT. Improvements in execution and three structural quality indicators were significant after the Holm correction by each model; the benefit on co-successful execution pairs was more pronounced in Gemini and unstable in DeepSeek. RQ2 used 100 error units from LIBRO--Defects4J. TGSLR achieved a 60\% success rate of fixes, compared to 46\% of local fixes without scenario context and 76\% of full-class regeneration. The advantage over the local fix method was not significant after Holm; on successful fixes, TGSLR changed by an average of 10.48 lines less than full-class regeneration, but this is only a descriptive comparison. RQ3 uses its own verification dataset of 73 cases from 14 Java projects. With Gemini, specialized verification reduces the false-acceptance rate from 57.69\% to 26.92\% and increases routing accuracy from 42.59\% to 66.67\%, at the cost of input tokens being 2.97 times that of a general reviewer. The RQ3 results are exploratory. Overall, the study clarifies the value and trade-offs of planning, traceable debugging, and specialized verification in LLM-based testing.}
+\abstract{Large language model (LLM)-based Java unit-test generation remains limited by weak structural planning, uncontrolled repair scope, and unreliable verification decisions. TRACE addresses these limitations through structure-derived atomic scenario planning, Traceability-Guided Scenario-Local Repair (TGSLR), and tool-grounded specialized multi-agent verification. The contributions were evaluated independently in three studies. In RQ1, 600 runs on 150 SF110 focal methods and two model configurations showed that planning increased aggregate execution success from 58.00\% to 88.33\% and end-to-end branch coverage from 43.51\% to 70.58\%. Execution success and three structural-quality metrics improved significantly after Holm correction in both configurations, whereas compilation success improved significantly only for DeepSeek. Conditional benefits among pairs that both executed were clear for Gemini but weak and unstable for DeepSeek, while planning used approximately 2.03 times as many tokens. In RQ2, TGSLR repaired 60\% of 100 LIBRO--Defects4J error units, compared with 46\% for local repair without scenario context and 76\% for full-class regeneration. Its advantage over local repair was not significant after Holm correction. In the exploratory RQ3 study of 73 cases from 14 projects, specialized verification reduced Gemini's false-acceptance rate from 57.69\% to 26.92\% and increased routing accuracy from 42.59\% to 66.67\%, while using 2.97 times as many input tokens as a general reviewer. These findings characterize the reliability, locality, and cost trade-offs of TRACE within the evaluated settings.}
 
-\keywords{unit test generation; large language models; structural planning; traceability-guided repair; multi-agent verification; mutation testing; Java}
+\keywords{unit test generation; large language models; structural planning; traceability-guided repair; multi-agent verification; Java}
 
 \maketitle
 
@@ -45,7 +46,7 @@ The development of large language models (LLMs) opens up the possibility of auto
 
 \subsection{Limitations of existing LLM-based methods}\label{subsec:limitations}
 
-Existing methods still face a significant gap between generating test code and producing a usable test suite. LLMs may call non-existent APIs, choose incorrect imports or dependencies, violate type or access rules, or create fixtures and mocks incompatible with the class to be tested. Many tests thus fail to compile; tests that compile successfully can still fail at runtime due to incorrect initialization, unexpected exceptions, or assertions that do not match observed behavior. ChatTester, ChatUniTest, TestART, and TestLoter use responses During compilation, execution, or coverage in the generation--validation--repair cycles \cite{bib2,bib3,bib9,bib10}; CATGen emphasizes structured project context, deterministic scaffolding, and static post-processing \cite{bib5}; while large-scale studies show that results are still sensitive to prompt and context configuration \cite{bib11}. These advances do not automatically ensure that tests have correctly implemented the target scenario, have a reliable oracle, or have been fixed within a scope that does not break already verified tests.
+Existing methods still face a significant gap between generating test code and producing a usable test suite. LLMs may call non-existent APIs, choose incorrect imports or dependencies, violate type or access rules, or create fixtures and mocks incompatible with the class to be tested. Many tests thus fail to compile; tests that compile successfully can still fail at runtime due to incorrect initialization, unexpected exceptions, or assertions that do not match observed behavior. ChatTester, ChatUniTest, TestART, and TestLoter use feedback from compilation, execution, or coverage in generation--validation--repair cycles \cite{bib2,bib3,bib9,bib10}; CATGen emphasizes structured project context, deterministic scaffolding, and static post-processing \cite{bib5}; while large-scale studies show that results are still sensitive to prompt and context configuration \cite{bib11}. These advances do not automatically ensure that tests have correctly implemented the target scenario, have a reliable oracle, or have been fixed within a scope that does not break already verified tests.
 
 Three specific gaps have not yet been satisfactorily addressed. First, standardized test design techniques such as equivalence partitioning, boundary-value analysis, and structural coverage provide auditable rules to infer test conditions \cite{bib6}, while TestAgent's Requirement Planner generates structured test requirements from semantic analysis of the method \cite{bib7}. Therefore, the individual impact of structural planning versus direct generation is unclear when keeping the LLM, context, number of test methods, and generation budget fixed. Second, ChatTester, ChatUniTest, TestART, and TestLoter use feedback to fix test failures \cite{bib2,bib3,bib9,bib10}, but do not publish an immutable bidirectional contract between the atomic scenario and the test method; therefore, the benefits of scenario-local repair in terms of cost, edit scope, repair iterations, and regression need to be measured directly against fixing a failing test method without scenario context and regenerating the entire class. Third, TestAgent has combined agent roles with tool APIs and allowed the Reviewer to handle execution, coverage, and mutation evidence, while MAGISTER separates the Analyzer, Test Generation, Executor, and Refiner Agent \cite{bib7,bib8}. The gap that TRACE aims at, therefore, is not the absence of tools in general, but the fact that verification has not yet been separated into specialized evidence streams, linked to an immutable scenario identity, and aggregated into a primary failure cause along with a repair route at the scenario level. The increased accuracy of this design needs to be distinguished from Basic Tool Gates and a General-Purpose Reviewer provided along with evidence.
 
@@ -83,11 +84,11 @@ From the research directions above, three prominent gaps are: (1) the independen
 
 This study proposes the latest version of TRACE, an end-to-end framework used to generate, verify, debug, and package Java unit tests at the focal method level. TRACE uses a Large Language Model (LLM), but it does not entrust the entire process to a single LLM call. The approach is designed according to three requirements stated in the Introduction: the test scenario must be planned from auditable test design techniques; each generated test method must have clear ownership of the scenario; and verification decisions must be based on execution evidence from the tool. As illustrated in Figure~\ref{fig:trace-framework}, the sequential pipeline maintains traceability from the repository to the final test suite, while dedicated verification agents can run in parallel on independent evidence streams.
 
-\begin{figure}[htbp]
+\begin{figure*}[htbp]
 \centering
-\includegraphics[width=\textwidth]{framework-pipeline-blue-v4-compact.png}
-\caption{Overview of the TRACE framework.}\label{fig:trace-framework}
-\end{figure}
+\includegraphics[width=\textwidth]{Fig1.png}
+\caption{Overview of the TRACE framework}\label{fig:trace-framework}
+\end{figure*}
 
 The framework takes a Java repository, a focal class, a focal method, and a pipeline configuration file. The output includes accepted test code, scenario--test mapping, verification evidence, repair history, and unresolved or abstained cases. This design serves three research questions (Research Question-RQ): RQ1 separates the impact of Structural Planning from Direct Generation; RQ2 evaluates Traceability-Guided Scenario-Local Repair against Failing-Test-Method Repair and Full-Class Regeneration; RQ3 assesses Tool-Grounded Specialized Multi-Agent Verification compared to Basic Tool Gates and a General-Purpose Reviewer when methods receive the same tool evidence.
 
@@ -110,13 +111,19 @@ Y is the pipeline.yaml configuration file, containing input parameters, build en
 
 \begin{equation}
 \begin{aligned}
-M = (&\,\mathrm{java\_version},\mathrm{build\_tool},\mathrm{dependencies},\mathrm{test\_framework},\\
-&\mathrm{source\_paths},\mathrm{test\_paths},\mathrm{focal\_class\_api},\\
-&\mathrm{focal\_method\_signature},\mathrm{complexity\_map},\mathrm{existing\_tests},\\
-&\mathrm{requirement\_evidence},\mathrm{build\_commands},\mathrm{ast\_model},\mathrm{cfg\_model},\\
-&\mathrm{input\_config},\mathrm{repo\_config},\mathrm{build\_config},\mathrm{llm\_config},\mathrm{prompt\_config},\\
-&\mathrm{planning\_config},\mathrm{generation\_config},\mathrm{verification\_config},\mathrm{repair\_config},\\
-&\mathrm{metrics\_config},\mathrm{output\_config},\mathrm{report\_config})
+M = (&\,\mathrm{java\_version},\mathrm{build\_tool},\\
+&\mathrm{dependencies},\mathrm{test\_framework},\\
+&\mathrm{source\_paths},\mathrm{test\_paths},\\
+&\mathrm{focal\_class\_api},\mathrm{focal\_method\_signature},\\
+&\mathrm{complexity\_map},\mathrm{existing\_tests},\\
+&\mathrm{requirement\_evidence},\mathrm{build\_commands},\\
+&\mathrm{ast\_model},\mathrm{cfg\_model},\\
+&\mathrm{input\_config},\mathrm{repo\_config},\\
+&\mathrm{build\_config},\mathrm{llm\_config},\\
+&\mathrm{prompt\_config},\mathrm{planning\_config},\\
+&\mathrm{generation\_config},\mathrm{verification\_config},\\
+&\mathrm{repair\_config},\mathrm{metrics\_config},\\
+&\mathrm{output\_config},\mathrm{report\_config})
 \end{aligned}
 \label{eq:repository-context}
 \end{equation}
@@ -142,8 +149,10 @@ Here, $P_{\mathrm{struct}}$ is the Structural Planning function; the function us
 
 \begin{equation}
 \begin{aligned}
-S_i = (&\,id_i, technique_i, trigger_i, input\_partition_i, expected\_behavior_i,\\
-&oracle\_provenance_i, structural\_target_i, required\_context_i)
+S_i = (&\,id_i, technique_i, trigger_i,\\
+&input\_partition_i, expected\_behavior_i,\\
+&oracle\_provenance_i, structural\_target_i,\\
+&required\_context_i)
 \end{aligned}
 \label{eq:atomic-scenario}
 \end{equation}
@@ -168,8 +177,10 @@ In which, $G_{\mathrm{trace}}$ is the traceable scenario test generation functio
 Candidate test suite and scenario--test mapping are defined as follows:
 
 \begin{equation}
-T = \{T_i \mid 1 \leq i \leq n\}, \qquad
-\Omega = \{(S_i,T_i) \mid 1 \leq i \leq n\}
+\begin{aligned}
+T &= \{T_i \mid 1 \leq i \leq n\},\\
+\Omega &= \{(S_i,T_i) \mid 1 \leq i \leq n\}
+\end{aligned}
 \label{eq:scenario-test-mapping}
 \end{equation}
 
@@ -194,8 +205,9 @@ The evidence record of the pair ($S_i$, $T_i$) is represented as follows:
 
 \begin{equation}
 \begin{aligned}
-E_i = (&\,compile_i, run_i, assertion\_outcome_i, coverage_i, mutation_i,\\
-&logs_i, provenance_i)
+E_i = (&\,compile_i, run_i,\\
+&assertion\_outcome_i, coverage_i,\\
+&mutation_i, logs_i, provenance_i)
 \end{aligned}
 \label{eq:evidence-record}
 \end{equation}
@@ -267,7 +279,7 @@ RQ3 -- Accuracy of Tool-Grounded Specialized Multi-Agent Verification.
 
 Compared to Basic Tool Gates and a General-Purpose Reviewer provided with tool evidence, how accurately can Tool-Grounded Specialized Multi-Agent Verification detect false acceptance, perform scenario-level failure attribution, and select the primary repair route?
 
-RQ1 evaluates the impact of the structured planning step before test code generation. RQ2 evaluates the ability to use scenario--test traceability relationships to limit the scope of repair and protect the tests that have been verified. RQ3 Evaluate the mechanism of verifying multiple specialized agents in synthesizing tool evidence, detecting invalid artifacts, and correctly identifying the cause as well as the repair direction.
+RQ1 evaluates the impact of the structured planning step before test code generation. RQ2 evaluates the ability to use scenario--test traceability relationships to limit the scope of repair and protect the tests that have been verified. RQ3 evaluates the multi-agent verification mechanism in synthesizing tool evidence, detecting invalid artifacts, and correctly identifying both the cause and the repair direction.
 
 \subsection{Experimental design}\label{subsec:experimental-design}
 
@@ -275,7 +287,7 @@ The study conducted three experiments corresponding to three research questions,
 
 For RQ1, DIRECT and PLANNED were compared using a paired design on the same 150 focal methods from 58 Java projects in SF110. DIRECT generates tests directly from the repository context, whereas PLANNED creates atomic scenarios from AST/CFG before generating tests. In each model configuration, both treatments used the same focal methods, source revision, repository context, decoding settings, a maximum limit of six generated test methods, and generation budget; repair and verifier feedback were disabled. Structural-Target Satisfaction of both was calculated on the same reference target set, determined independently before test generation. The experiment used Gemini 3.7 Flash and DeepSeek V4 Flash; each focal method--model--treatment combination was run once, resulting in a total of 600 runs (150 focal methods \ensuremath{\times} two models \ensuremath{\times} two treatments). Planning costs are recorded separately and included in the total costs of PLANNED.
 
-For RQ2, TGSLR, FTMR, and FCR were evaluated on the same 100 initial failing artifacts across six LIBRO--Defects4J projects. The treatments used the same repository state, failure evidence, model, seed, repair budget, and stopping conditions. TGSLR received scenario--test mapping and only fixed the corresponding test method; FTMR fixed the same method but without scenario context; FCR was allowed to regenerate the entire test class. Each treatment ran once on each unit using the gemini 3.6 flash model, generating a total of 300 logic runs, with up to three repair rounds and budget. 75,000 tokens per run. The budget is checked between completed calls, so the last call may cause the total tokens to exceed the threshold; provider retries are not counted as a new experimental unit.
+For RQ2, TGSLR, FTMR, and FCR were evaluated on the same 100 initial failing artifacts across six LIBRO--Defects4J projects. The treatments used the same repository state, failure evidence, model, seed, repair budget, and stopping conditions. TGSLR received scenario--test mapping and only fixed the corresponding test method; FTMR fixed the same method but without scenario context; FCR was allowed to regenerate the entire test class. Each treatment ran once on each unit using the gemini 3.6 flash model, generating a total of 300 logic runs, with up to three repair rounds and a budget of 75,000 tokens per run. The budget is checked between completed calls, so the last call may cause the total tokens to exceed the threshold; provider retries are not counted as a new experimental unit.
 
 For RQ3, B0, B1, and B2 were evaluated on a separate verification dataset consisting of 73 cases from 14 Java projects, including 65 controlled-injection cases and eight natural cases. B0 only used compilation and selected-JUnit outcomes; B1 and B2 received the same evidence envelope, in which B2 used three specialized verifiers and an Evidence Aggregator. Providing the same evidence does not imply equal reasoning budgets; the number of calls and token counts were recorded to assess the cost trade-offs. Since the gold set was labeled with AI assistance and the cohort had been exposed to a previous prototype, RQ3 is considered an exploratory experiment.
 
@@ -295,7 +307,9 @@ According to the end-to-end scoring protocol, a run with an invalid test artifac
 
 \subsubsection{Descriptive Results}\label{subsubsec:rq1-descriptive}
 
-\begin{table}[htbp]
+Table~\ref{tab:rq1-descriptive} summarizes the end-to-end results for both treatments and model configurations.
+
+\begin{table*}[htbp]
 \caption{END-TO-END DESCRIPTION RESULTS}\label{tab:rq1-descriptive}
 \centering
 \scriptsize
@@ -303,15 +317,18 @@ According to the end-to-end scoring protocol, a run with an invalid test artifac
 \toprule
 Model & Treatment & CSR, n (\%) & ESR, n (\%) & STS (\%) & BC (\%) & MS (\%) \\
 \midrule
-Gemini 3.7 Flash & DIRECT & 142 (94,67\%) & 124 (82,67\%) & 46,54 & 59,34 & 54,91 \\
-Gemini 3.7 Flash & PLANNED & 147 (98,00\%) & 135 (90,00\%) & 58,38 & 71,19 & 64,32 \\
-DeepSeek V4 Flash & DIRECT & 95 (63,33\%) & 50 (33,33\%) & 25,09 & 28,64 & 27,94 \\
-DeepSeek V4 Flash & PLANNED & 142 (94,67\%) & 130 (86,67\%) & 58,57 & 69,98 & 63,52 \\
-Aggregate & DIRECT & 237 (79,00\%) & 174 (58,00\%) & 35,52 & 43,51 & 41,43 \\
-Aggregate & PLANNED & 289 (96,33\%) & 265 (88,33\%) & 58,47 & 70,58 & 63,92 \\
+Gemini 3.7 Flash & DIRECT & 142 (94.67\%) & 124 (82.67\%) & 46.54 & 59.34 & 54.91 \\
+Gemini 3.7 Flash & PLANNED & 147 (98.00\%) & 135 (90.00\%) & 58.38 & 71.19 & 64.32 \\
+DeepSeek V4 Flash & DIRECT & 95 (63.33\%) & 50 (33.33\%) & 25.09 & 28.64 & 27.94 \\
+DeepSeek V4 Flash & PLANNED & 142 (94.67\%) & 130 (86.67\%) & 58.57 & 69.98 & 63.52 \\
+Aggregate & DIRECT & 237 (79.00\%) & 174 (58.00\%) & 35.52 & 43.51 & 41.43 \\
+Aggregate & PLANNED & 289 (96.33\%) & 265 (88.33\%) & 58.47 & 70.58 & 63.92 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\begin{tablenotes}
+\item STS, BC, and MS are end-to-end values: invalid, non-compiling, or non-executing runs receive 0; N/A is reserved for an absent structural target or valid denominator and is excluded from the corresponding mean.
+\end{tablenotes}
+\end{table*}
 
 CSR: Compilation Success Rate; ESR: Execution Success Rate; STS: Structural-Target Satisfaction; BC: focal-method Branch Coverage; MS: focal-method Mutation Score. CSR and ESR have N = 150 for each model--approach combination. STS, BC, and MS are averages over non-N/A observations. For Gemini, the number of STS/BC/MS observations is 140/139/150 for both approaches; for DeepSeek, the corresponding numbers are 148/148/150 in DIRECT and 141/140/150 in PLANNED. The summary rows only provide aggregate descriptions and should not be used to infer or rank the two LLMs. Across both model configurations, PLANNED achieved a CSR of 96.33\%, 17.33 percentage points higher than DIRECT's 79.00\%. ESR increased from 58.00\% to 88.33\%, corresponding to 91 additional generated test suites executing successfully. For structural-adequacy metrics, STS increased from 35.52\% to 58.47\%, BC from 43.51\% to 70.58\%, and MS from 41.43\% to 63.92\%. These aggregated results show a consistent trend, but are only descriptive.
 
@@ -321,7 +338,9 @@ On Gemini 3.7 Flash, PLANNED improved all five metrics: CSR increased by 3.33 pe
 
 Because DIRECT and PLANNED are evaluated on the same focal methods, statistical analysis follows a paired design. The two-sided exact McNemar test is used for CSR and ESR. The two-sided Wilcoxon signed-rank test is used for STS, BC, and MS on the PLANNED - DIRECT differences, with tie correction, zero differences removed, and no continuity correction applied. Holm correction is applied for the family of five primary metrics within each LLM, with \ensuremath{\alpha} = 0.05. Matched odds ratio (OR) is reported for binary metrics, while paired rank-biserial correlation ($r_{\mathrm{rb}}$) is used for continuous metrics.
 
-\begin{table}[htbp]
+Table~\ref{tab:rq1-paired} reports the paired tests and Holm-adjusted results.
+
+\begin{table*}[htbp]
 \caption{RESULTS OF PAIRED TESTS}\label{tab:rq1-paired}
 \centering
 \scriptsize
@@ -329,19 +348,19 @@ Because DIRECT and PLANNED are evaluated on the same focal methods, statistical 
 \toprule
 Model & Metric & n & p & $p_{\mathrm{Holm}}$ & Effect size \\
 \midrule
-Gemini 3.7 & CSR & 150 & 0,0625 & 0,0625 & OR = $\infty$ (5/0) \\
-Gemini 3.7 & ESR & 150 & 0,000977 & 0,001953 & OR = $\infty$ (11/0) \\
-Gemini 3.7 & STS & 140 & $7,04\times10^{-6}$ & $2,11\times10^{-5}$ & $r_{\mathrm{rb}}=0,907$ \\
-Gemini 3.7 & BC & 139 & $2,42\times10^{-7}$ & $1,21\times10^{-6}$ & $r_{\mathrm{rb}}=1,000$ \\
-Gemini 3.7 & MS & 150 & $7,88\times10^{-7}$ & $3,15\times10^{-6}$ & $r_{\mathrm{rb}}=1,000$ \\
-DeepSeek V4 & CSR & 150 & $5,52\times10^{-12}$ & $1,10\times10^{-11}$ & OR = 16,667 (50/3) \\
-DeepSeek V4 & ESR & 150 & $3,43\times10^{-23}$ & $1,72\times10^{-22}$ & OR = 81,000 (81/1) \\
-DeepSeek V4 & STS & 141 & $1,44\times10^{-10}$ & $1,44\times10^{-10}$ & $r_{\mathrm{rb}}=0,906$ \\
-DeepSeek V4 & BC & 140 & $1,92\times10^{-13}$ & $5,76\times10^{-13}$ & $r_{\mathrm{rb}}=0,953$ \\
-DeepSeek V4 & MS & 150 & $1,03\times10^{-14}$ & $4,13\times10^{-14}$ & $r_{\mathrm{rb}}=0,984$ \\
+Gemini 3.7 & CSR & 150 & 0.0625 & 0.0625 & OR = $\infty$ (5/0) \\
+Gemini 3.7 & ESR & 150 & 0.000977 & 0.001953 & OR = $\infty$ (11/0) \\
+Gemini 3.7 & STS & 140 & $7.04\times10^{-6}$ & $2.11\times10^{-5}$ & $r_{\mathrm{rb}}=0.907$ \\
+Gemini 3.7 & BC & 139 & $2.42\times10^{-7}$ & $1.21\times10^{-6}$ & $r_{\mathrm{rb}}=1.000$ \\
+Gemini 3.7 & MS & 150 & $7.88\times10^{-7}$ & $3.15\times10^{-6}$ & $r_{\mathrm{rb}}=1.000$ \\
+DeepSeek V4 & CSR & 150 & $5.52\times10^{-12}$ & $1.10\times10^{-11}$ & OR = 16.667 (50/3) \\
+DeepSeek V4 & ESR & 150 & $3.43\times10^{-23}$ & $1.72\times10^{-22}$ & OR = 81.000 (81/1) \\
+DeepSeek V4 & STS & 141 & $1.44\times10^{-10}$ & $1.44\times10^{-10}$ & $r_{\mathrm{rb}}=0.906$ \\
+DeepSeek V4 & BC & 140 & $1.92\times10^{-13}$ & $5.76\times10^{-13}$ & $r_{\mathrm{rb}}=0.953$ \\
+DeepSeek V4 & MS & 150 & $1.03\times10^{-14}$ & $4.13\times10^{-14}$ & $r_{\mathrm{rb}}=0.984$ \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
 n is the number of complete pairs before removing zero differences in the Wilcoxon test. CSR, ESR, and MS each have 150 pairs in each LLM; STS/BC have 140/139 pairs on Gemini and 141/140 pairs on DeepSeek. The numbers in parentheses after OR are respectively the number of pairs where PLANNED succeeded--DIRECT failed and the number of pairs in the opposite direction. OR = \ensuremath{\infty} indicates that there are no pairs in the opposite direction in the sample, which does not mean infinite effectiveness. $r_{\mathrm{rb}}$ > 0 favors PLANNED; $r_{\mathrm{rb}}$ = 1 indicates that all non-zero paired differences are positive.
 
@@ -355,7 +374,7 @@ On DeepSeek, the paired differences were smaller: STS increased by 1.18 percenta
 
 \subsubsection{Costs and Trade-offs (Cost Trade-off)}\label{subsubsec:rq1-cost}
 
-Structural Planning uses an additional LLM phase to create a plan, which increases costs. On Gemini, the mean wall-clock time increased from 13.45 s to 18.95 s (+40.92\%), while mean token usage increased from 3,750 to 7,450 tokens per run; total tokens increased from 562,500 to 1,117,500 (+98.67\%). On DeepSeek, the mean wall-clock time increased from 64.34 s to 100.06 s (+55.54\%), while mean token usage increased from 7,904.10 to 16,189.38 tokens; total tokens increased from 1,185,615 increased to 2,428,407 (+104.82\%). Meanwhile, the average number of generated test methods decreased from 3.65 to 2.92 on Gemini and from 5.74 to 2.92 on DeepSeek. Thus, the end-to-end improvement does not come from generating more test methods, but it comes with nearly double the token consumption and higher wall-clock time.
+Structural Planning uses an additional LLM phase to create a plan, which increases costs. On Gemini, the mean wall-clock time increased from 13.45 s to 18.95 s (+40.92\%), while mean token usage increased from 3,750 to 7,450 tokens per run; total tokens increased from 562,500 to 1,117,500 (+98.67\%). On DeepSeek, the mean wall-clock time increased from 64.34 s to 100.06 s (+55.54\%), while mean token usage increased from 7,904.10 to 16,189.38 tokens; total tokens increased from 1,185,615 to 2,428,407 (+104.82\%). Meanwhile, the average number of generated test methods decreased from 3.65 to 2.92 on Gemini and from 5.74 to 2.92 on DeepSeek. Thus, the end-to-end improvement does not come from generating more test methods, but it comes with nearly double the token consumption and higher wall-clock time.
 
 \subsubsection{Answer to RQ1}\label{subsubsec:rq1-answer}
 
@@ -375,22 +394,24 @@ All 100 pairs were retained; all other results of Success---including two Cancel
 
 The Success status in CSV requires the candidate to be applicable, compiled, and pass the focal test successfully on the fixed revision, the bug can be reproduced on the buggy revision when necessary, and no regression is caused. Since CSV does not have a scenario conformance or structural target field, this outcome only measures core repair, not the entire acceptance contract of TRACE; coverage and mutation are reported separately.
 
-\begin{table}[htbp]
+Table~\ref{tab:rq2-core-success} reports core repair success for each treatment.
+
+\begin{table*}[htbp]
 \caption{Core repair success per 100 defect units of each treatment.}\label{tab:rq2-core-success}
 \begin{tabular}{@{}lrrr@{}}
 \toprule
 Repair strategy & Runs & Successful core repairs & Core repair success rate \\
 \midrule
-TGSLR & 100 & 60 & 60,0\% \\
-FTMR & 100 & 46 & 46,0\% \\
-FCR & 100 & 76 & 76,0\% \\
+TGSLR & 100 & 60 & 60.0\% \\
+FTMR & 100 & 46 & 46.0\% \\
+FCR & 100 & 76 & 76.0\% \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-TGSLR succeeded 60/100 runs, compared to 46/100 for FTMR and 76/100 for FCR. The number of focal test passes were 72, 73, and 93, respectively; the number of buggy-revision oracle passes were 66, 52, and 84. It is not possible to report the compile rate separately because the CSV only records this result in the status/stop reason.
+TGSLR succeeded 60/100 runs, compared to 46/100 for FTMR and 76/100 for FCR. The number of focal test passes were 72, 73, and 93, respectively; the number of buggy-revision oracle passes were 66, 52, and 84. It is not possible to report the compile rate separately because the CSV only records this result in the status/stop reason. Table~\ref{tab:rq2-paired-success} gives the paired comparisons.
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \caption{Comparison of paired core repair success.}\label{tab:rq2-paired-success}
 \centering
 \scriptsize
@@ -398,17 +419,19 @@ TGSLR succeeded 60/100 runs, compared to 46/100 for FTMR and 76/100 for FCR. The
 \toprule
 Comparison & Pairs & TGSLR success & Comparator success & Difference & TGSLR win/tie/loss \\
 \midrule
-TGSLR--FTMR & 100 & 60,0\% & 46,0\% & +14.0 percentage points & 21/72/7 \\
-TGSLR--FCR & 100 & 60,0\% & 76,0\% & -16.0 percentage points & 4/76/20 \\
+TGSLR--FTMR & 100 & 60.0\% & 46.0\% & +14.0 percentage points & 21/72/7 \\
+TGSLR--FCR & 100 & 60.0\% & 76.0\% & -16.0 percentage points & 4/76/20 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 For TGSLR--FTMR, W/T/L = 21/72/7, matched odds ratio = 3.00 (95\% CI: 1.23--8.35) and $p_{\mathrm{Holm}}$ = 0.0752; the 14-point advantage is therefore only descriptive after adjustment. For TGSLR--FCR, W/T/L = 4/76/20, matched odds ratio = 0.20 (95\% CI: 0.05--0.60) and $p_{\mathrm{Holm}}$ = 0.0108, confirming that FCR has a higher core repair success.
 
 \subsubsection{LLM costs, number of revisions, and scope of edits}\label{subsubsec:rq2-cost}
 
-\begin{table}[htbp]
+Table~\ref{tab:rq2-cost} summarizes inference cost, repair iterations, and edit scope.
+
+\begin{table*}[htbp]
 \caption{Costs, number of repair cycles, and number of lines changed.}\label{tab:rq2-cost}
 \centering
 \scriptsize
@@ -416,18 +439,20 @@ For TGSLR--FTMR, W/T/L = 21/72/7, matched odds ratio = 3.00 (95\% CI: 1.23--8.35
 \toprule
 Repair strategy & Mean tokens per run & Mean API calls per run & Mean repair iterations per run & Mean changed LOC per successful repair \\
 \midrule
-TGSLR & 25.284,9 & 4,51 & 2,05 & 18,4 \\
-FTMR & 28.238,2 & 4,82 & 2,30 & 16,5 \\
-FCR & 17.798,2 & 3,74 & 1,39 & 28,9 \\
+TGSLR & 25,284.9 & 4.51 & 2.05 & 18.4 \\
+FTMR & 28,238.2 & 4.82 & 2.30 & 16.5 \\
+FCR & 17,798.2 & 3.74 & 1.39 & 28.9 \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 Compared to FTMR, TGSLR has a lower average value of 2,953.3 tokens, 0.31 API calls, and 0.25 edit rounds per run, but no difference is significant after Holm: $p_{\mathrm{Holm}}$ = 0.1830, 0.7089, and 0.0912; rank-biserial correlation is -0.230, 0.152, and 0.397; 95\% CI of FTMR-TGSLR is [96.7; 6,125.0], [-0.39; 0.98], and [0.04; 0.46]. Compared with FCR, TGSLR used 7,486.7 more tokens, 0.77 more API calls, and 0.66 more repair iterations; the corresponding $p_{\mathrm{Holm}}$ values were $3.82\times 10^{-6}$, 0.00185, and $5.49\times 10^{-7}$; the rank-biserial correlations were 0.585, 0.470, and 0.754; and the 95\% CIs were [4,974.2; 10,153.9], [0.26; 1.27], and [0.46; 0.86]. Among successful repairs, TGSLR changed an average of 18.45 lines, compared with 16.50 for FTMR and 28.93 for FCR; the increase of 1.95 lines and decrease of 10.48 lines are descriptive only because the sets of successful repairs differ.
 
 \subsubsection{Regression and final test adequacy}\label{subsubsec:rq2-regression}
 
-\begin{table}[htbp]
+Table~\ref{tab:rq2-regression} reports regression events and the available adequacy measurements.
+
+\begin{table*}[htbp]
 \caption{Regression over the entire run and adequacy on successful repairs with measurements.}\label{tab:rq2-regression}
 \centering
 \scriptsize
@@ -435,12 +460,12 @@ Compared to FTMR, TGSLR has a lower average value of 2,953.3 tokens, 0.31 API ca
 \toprule
 Repair strategy & Runs with regression & Coverage measurements / successful repairs & Mean line coverage & Mutation measurements / successful repairs & Mean mutation score \\
 \midrule
-TGSLR & 6 & 51/60 & 34,4\% & 40/60 & 17,6\% \\
-FTMR & 6 & 39/46 & 31,3\% & 29/46 & 14,6\% \\
-FCR & 8 & 59/76 & 37,9\% & 47/76 & 18,7\% \\
+TGSLR & 6 & 51/60 & 34.4\% & 40/60 & 17.6\% \\
+FTMR & 6 & 39/46 & 31.3\% & 29/46 & 14.6\% \\
+FCR & 8 & 59/76 & 37.9\% & 47/76 & 18.7\% \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 TGSLR and FTMR both recorded six regression events (preserving 94\% of protected tests), compared to eight for FCR (92\%); both pairwise comparisons were not significant after correction ($p_{\mathrm{Holm}}$ = 1.000). For the available successful repair measures, the average line coverage and mutation score of TGSLR were higher than FTMR but lower than FCR. The outcomes ToolFailed, ReportMissing, and NotRun were considered as missing rather than 0, so adequacy was only interpreted descriptively.
 
@@ -464,7 +489,9 @@ AI participates in suggesting and checking mapping/scenario, while also evaluati
 
 B0 uses compilation and selected-JUnit results. B1 is a general reviewer. B2 consists of three specialists in plan-to-test conformance, compilation/runtime, and coverage/mutation; a deterministic aggregator creates the decision, primary cause, and repair route. In each case, B1 and B2 receive an evidence envelope with the same SHA-256. The cohort has 26 false-passing cases and 54 cases with the gold decision \texttt{REPAIR\_REQUIRED}.
 
-\begin{table}[htbp]
+Table~\ref{tab:rq3-safety} summarizes the safety and decision-quality outcomes.
+
+\begin{table*}[htbp]
 \caption{Safety and quality outcome measures}\label{tab:rq3-safety}
 \centering
 \scriptsize
@@ -481,13 +508,13 @@ GLM sensitivity & B1 & 20.69\% & 3.85\% & 57.53\% & 46.58\% & 94.12\% \\
 GLM sensitivity & B2 & 26.67\% & 0.00\% & 47.95\% & 60.27\% & 77.27\% \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 Gemini produced consistently favorable point estimates for B2: detecting 16/26 false-passing cases instead of 11/26, reducing false acceptance from 15 to 7 cases, and increasing selective accuracy by 9.73 percentage points; in return, B2 generated 8 false positives and abstained on 13 cases. On the DeepSeek repaired set, B2 eliminated 11 false acceptances, but Decision Accuracy decreased by 10.96 points due to lower coverage. GLM also reduced FAR, but had 87 invalid outputs (B1: 37; B2: 50), so it cannot be used to claim superiority.
 
 \subsubsection{Attribution, routing and uncertainty}\label{subsubsec:rq3-routing}
 
-\begin{table}[htbp]
+\begin{table*}[htbp]
 \caption{Diagnosis and repair routing on 54 REPAIR\_REQUIRED cases}\label{tab:rq3-routing}
 \centering
 \scriptsize
@@ -501,11 +528,13 @@ DeepSeek repaired & B1 / B2 & 37.40\% / 37.49\% & 53.70\% / 62.96\% & 12.33\% / 
 GLM sensitivity & B1 / B2 & 38.00\% / 42.98\% & 46.30\% / 55.56\% & 53.42\% / 39.73\% \\
 \bottomrule
 \end{tabularx}
-\end{table}
+\end{table*}
 
 Table~\ref{tab:rq3-routing} shows that Routing increased by 24.08 percentage points on Gemini and by 9.26 percentage points on both DeepSeek and GLM. Attribution increased by only 2.35, 0.09, and 4.98 points, respectively; in particular, DeepSeek's 0.09-point increase is negligible in practical terms. These differences are descriptive point estimates, not causal evidence specifically for role separation, because B2 simultaneously uses multiple specialist calls and about three times as many input tokens as B1.
 
-\begin{table}[htbp]
+Table~\ref{tab:rq3-uncertainty} reports the paired uncertainty analyses.
+
+\begin{table*}[htbp]
 \caption{Paired Tests and Uncertainty}\label{tab:rq3-uncertainty}
 \centering
 \scriptsize
@@ -518,8 +547,10 @@ DeepSeek repaired & 0.115 & 0.00 [-9.77; 9.62] & 0.0010 & 0.2266 \\
 GLM sensitivity & 0.143 & +5.98 [0.00; 19.26] & 1.0000 & 0.0625 \\
 \bottomrule
 \end{tabularx}
-\footnotetext{* Supplementary exact McNemar tests, not adjusted for multiple testing. The cases are still clustered by repository and base test; therefore, they should be revalidated using a project-clustered bootstrap or an independent holdout.}
-\end{table}
+\begin{tablenotes}
+\item * Supplementary exact McNemar tests, not adjusted for multiple testing. The cases are still clustered by repository and base test; therefore, they should be revalidated using a project-clustered bootstrap or an independent holdout.
+\end{tablenotes}
+\end{table*}
 
 \subsubsection{Empirical integrity and cost}\label{subsubsec:rq3-integrity}
 
@@ -547,33 +578,33 @@ In the future, studies need to be repeated on multiple LLMs, seeds, repositories
 
 \backmatter
 
-\bmhead{Acknowledgements}
+\section*{Acknowledgements}
 To be completed by the authors.
 
-\section*{Declarations}
+\section*{Statements and Declarations}
 
-\bmhead{Funding}
+\subsection*{Funding}
 To be completed by the authors.
 
-\bmhead{Conflict of interest}
+\subsection*{Competing interests}
 To be completed by the authors.
 
-\bmhead{Ethics approval}
+\subsection*{Ethics approval}
 Not applicable.
 
-\bmhead{Consent to participate}
+\subsection*{Consent to participate}
 Not applicable.
 
-\bmhead{Consent for publication}
+\subsection*{Consent for publication}
 Not applicable.
 
-\bmhead{Data availability}
+\subsection*{Data availability}
 To be completed by the authors.
 
-\bmhead{Code availability}
+\subsection*{Code availability}
 To be completed by the authors.
 
-\bmhead{Author contribution}
+\subsection*{Author contributions}
 To be completed by the authors.
 
 \bibliography{trace-references}

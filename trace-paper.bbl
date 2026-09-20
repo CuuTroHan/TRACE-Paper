@@ -1,438 +1,152 @@
-%% BioMed_Central_Bib_Style_v1.01
-
 \begin{thebibliography}{25}
-% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
-\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
-\ifx \binits  \undefined \def \binits#1{#1}\fi
-\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
-\ifx \batitle  \undefined \def \batitle#1{#1}\fi
-\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
-\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
-\ifx \byear  \undefined \def \byear#1{#1}\fi
-\ifx \bissue  \undefined \def \bissue#1{#1}\fi
-\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
-\ifx \blpage  \undefined \def \blpage #1{#1}\fi
-\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
-\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
-\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
-\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
-\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
-\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
-\ifx \beditor  \undefined \def \beditor#1{#1}\fi
-\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
-\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
-\ifx \bedition  \undefined \def \bedition#1{#1}\fi
-\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
-\ifx \blocation  \undefined \def \blocation#1{#1}\fi
-\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
-\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
-\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
-\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
-\ifx \barticle \undefined \def \barticle#1{#1}\fi
-\bibcommenthead
-\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
-\ifx \botherref \undefined \def \botherref #1{#1}\fi
-\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
-\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
-\ifx \bbook \undefined \def \bbook#1{#1}\fi
-\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
-\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
-\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
-\ifx \endbibitem  \undefined \def \endbibitem {}\fi
-\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
-\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
-\csname PreBibitemsHook\endcsname
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\providecommand{\eprint}[2][]{\url{#2}}
+ \bibcommenthead
 
-%%% 1
-\bibitem[\protect\citeauthoryear{Fraser and Arcuri}{2011}]{bib1}
-\begin{bchapter}
-\bauthor{\bsnm{Fraser}, \binits{G.}},
-\bauthor{\bsnm{Arcuri}, \binits{A.}}:
-\bctitle{{EvoSuite}: Automatic test suite generation for object-oriented
-  software}.
-In: \bbtitle{Proceedings of the 19th ACM SIGSOFT Symposium and the 13th
-  European Conference on Foundations of Software Engineering},
-pp. \bfpage{416}--\blpage{419}
-(\byear{2011}).
-\doiurl{10.1145/2025113.2025179}
-\end{bchapter}
-\endbibitem
+\bibitem[{Almasi et~al.(2017)Almasi, Hemmati, Fraser, and Arcuri}]{bib3}
+Almasi M, Hemmati H, Fraser G, et~al (2017) An industrial evaluation of unit
+  test generation: Finding real faults in a financial application. In: 2017
+  IEEE/ACM 39th International Conference on Software Engineering: Software
+  Engineering in Practice Track, \doi{10.1109/ICSE-SEIP.2017.27}
 
-%%% 2
-\bibitem[\protect\citeauthoryear{Pacheco and Ernst}{2007}]{bib2}
-\begin{bchapter}
-\bauthor{\bsnm{Pacheco}, \binits{C.}},
-\bauthor{\bsnm{Ernst}, \binits{M.D.}}:
-\bctitle{{Randoop}: Feedback-directed random testing for java}.
-In: \bbtitle{Companion to the 22nd ACM SIGPLAN Conference on Object-Oriented
-  Programming Systems and Applications},
-pp. \bfpage{815}--\blpage{816}
-(\byear{2007}).
-\doiurl{10.1145/1297846.1297902}
-\end{bchapter}
-\endbibitem
+\bibitem[{Chang et~al.(2026)Chang, Fang, Chen, Shi, Shen, and Gu}]{bib15}
+Chang P, Fang Y, Chen S, et~al (2026) Test vs mutant: Adversarial llm agents
+  for robust unit test generation.
+  {\href{https://arxiv.org/abs/2602.08146}{{arXiv:2602.08146}}}
 
-%%% 3
-\bibitem[\protect\citeauthoryear{Almasi et~al.}{2017}]{bib3}
-\begin{bchapter}
-\bauthor{\bsnm{Almasi}, \binits{M.}},
-\bauthor{\bsnm{Hemmati}, \binits{H.}},
-\bauthor{\bsnm{Fraser}, \binits{G.}},
-\bauthor{\bsnm{Arcuri}, \binits{A.}}:
-\bctitle{An industrial evaluation of unit test generation: Finding real faults
-  in a financial application}.
-In: \bbtitle{2017 IEEE/ACM 39th International Conference on Software
-  Engineering: Software Engineering in Practice Track}
-(\byear{2017}).
-\doiurl{10.1109/ICSE-SEIP.2017.27}
-\end{bchapter}
-\endbibitem
+\bibitem[{Chen et~al.(2024)Chen, Hu, Zhi, Han, Deng, and Yin}]{bib4}
+Chen Y, Hu Z, Zhi C, et~al (2024) {ChatUniTest}: A framework for llm-based test
+  generation. In: Proceedings of the 32nd ACM International Conference on the
+  Foundations of Software Engineering, Demonstrations Track,
+  {\href{https://arxiv.org/abs/2305.04764}{{arXiv:2305.04764}}}
 
-%%% 4
-\bibitem[\protect\citeauthoryear{Chen et~al.}{2024}]{bib4}
-\begin{bchapter}
-\bauthor{\bsnm{Chen}, \binits{Y.}},
-\bauthor{\bsnm{Hu}, \binits{Z.}},
-\bauthor{\bsnm{Zhi}, \binits{C.}},
-\bauthor{\bsnm{Han}, \binits{J.}},
-\bauthor{\bsnm{Deng}, \binits{S.}},
-\bauthor{\bsnm{Yin}, \binits{J.}}:
-\bctitle{{ChatUniTest}: A framework for llm-based test generation}.
-In: \bbtitle{Proceedings of the 32nd ACM International Conference on the
-  Foundations of Software Engineering, Demonstrations Track}
-(\byear{2024})
-\end{bchapter}
-\endbibitem
+\bibitem[{Foster et~al.(2025)Foster, Gulati, Harman, Harper, Mao, Ritchey,
+  Robert, and Sengupta}]{bib14}
+Foster C, Gulati A, Harman M, et~al (2025) Mutation-guided llm-based test
+  generation at meta. In: Proceedings of the 33rd ACM International Conference
+  on the Foundations of Software Engineering, pp 180--191,
+  \doi{10.1145/3696630.3728544}
 
-%%% 5
-\bibitem[\protect\citeauthoryear{Sch{\"a}fer et~al.}{2024}]{bib5}
-\begin{barticle}
-\bauthor{\bsnm{Sch{\"a}fer}, \binits{M.}},
-\bauthor{\bsnm{Nadi}, \binits{S.}},
-\bauthor{\bsnm{Eghbali}, \binits{A.}},
-\bauthor{\bsnm{Tip}, \binits{F.}}:
-\batitle{An empirical evaluation of using large language models for automated
-  unit test generation}.
-\bjtitle{IEEE Transactions on Software Engineering}
-\bvolume{50}(\bissue{1}),
-\bfpage{85}--\blpage{105}
-(\byear{2024})
-\doiurl{10.1109/TSE.2023.3334955}
-\end{barticle}
-\endbibitem
+\bibitem[{Fraser and Arcuri(2011)}]{bib1}
+Fraser G, Arcuri A (2011) {EvoSuite}: Automatic test suite generation for
+  object-oriented software. In: Proceedings of the 19th ACM SIGSOFT Symposium
+  and the 13th European Conference on Foundations of Software Engineering, pp
+  416--419, \doi{10.1145/2025113.2025179}
 
-%%% 6
-\bibitem[\protect\citeauthoryear{Wang et~al.}{2024}]{bib6}
-\begin{bchapter}
-\bauthor{\bsnm{Wang}, \binits{Z.}},
-\bauthor{\bsnm{Liu}, \binits{K.}},
-\bauthor{\bsnm{Li}, \binits{G.}},
-\bauthor{\bsnm{Jin}, \binits{Z.}}:
-\bctitle{{HITS}: High-coverage llm-based unit test generation via method
-  slicing}.
-In: \bbtitle{Proceedings of the 39th IEEE/ACM International Conference on
-  Automated Software Engineering},
-pp. \bfpage{1258}--\blpage{1268}
-(\byear{2024}).
-\doiurl{10.1145/3691620.3695501}
-\end{bchapter}
-\endbibitem
+\bibitem[{Ghosh and Abbas(2026)}]{bib21}
+Ghosh T, Abbas N (2026) Retry and refine: A multi-agent framework for llm-based
+  reliable unit test generation. In: Artificial Intelligence XLII, Lecture
+  Notes in Computer Science, vol 16301. Springer Nature Switzerland, Cham, pp
+  92--105, \doi{10.1007/978-3-032-11402-0_7}
 
-%%% 7
-\bibitem[\protect\citeauthoryear{Nan et~al.}{2025}]{bib7}
-\begin{bchapter}
-\bauthor{\bsnm{Nan}, \binits{Z.}},
-\bauthor{\bsnm{Guo}, \binits{Z.}},
-\bauthor{\bsnm{Liu}, \binits{K.}},
-\bauthor{\bsnm{Xia}, \binits{X.}}:
-\bctitle{Test intention guided llm-based unit test generation}.
-In: \bbtitle{2025 IEEE/ACM 47th International Conference on Software
-  Engineering},
-pp. \bfpage{1026}--\blpage{1038}
-(\byear{2025}).
-\doiurl{10.1109/ICSE55347.2025.00243}
-\end{bchapter}
-\endbibitem
+\bibitem[{Hong et~al.(2024)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang,
+  Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber}]{bib17}
+Hong S, Zhuge M, Chen J, et~al (2024) {MetaGPT}: Meta programming for a
+  multi-agent collaborative framework. In: International Conference on Learning
+  Representations,
+  {\href{https://arxiv.org/abs/2308.00352}{{arXiv:2308.00352}}}
 
-%%% 8
-\bibitem[\protect\citeauthoryear{Wang et~al.}{2026a}]{bib8}
-\begin{botherref}
-\oauthor{\bsnm{Wang}, \binits{G.}},
-\oauthor{\bsnm{Xu}, \binits{Q.}},
-\oauthor{\bsnm{Briand}, \binits{L.C.}},
-\oauthor{\bsnm{Guo}, \binits{Z.}},
-\oauthor{\bsnm{Liu}, \binits{K.}}:
-Call-Chain-Aware LLM-Based Test Generation for Java Projects
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Hossain and Dwyer(2025)}]{bib16}
+Hossain SB, Dwyer MB (2025) {TOGLL}: Correct and strong test oracle generation
+  with llms. In: 2025 IEEE/ACM 47th International Conference on Software
+  Engineering, pp 1475--1487, \doi{10.1109/ICSE55347.2025.00098}
 
-%%% 9
-\bibitem[\protect\citeauthoryear{Wang et~al.}{2026b}]{bib9}
-\begin{botherref}
-\oauthor{\bsnm{Wang}, \binits{G.}},
-\oauthor{\bsnm{Xu}, \binits{Q.}},
-\oauthor{\bsnm{Briand}, \binits{L.C.}}:
-{TATG}: Tracking-Aware Testing Objective for LLM-Based Test Generation
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Jin et~al.(2025)Jin, Liu, Zhang, Hu, and Xia}]{bib10}
+Jin X, Liu Z, Zhang J, et~al (2025) {Tracets4J}: A traceable unit test
+  generation dataset. In: 2025 IEEE International Conference on Software
+  Analysis, Evolution and Reengineering, pp 757--767,
+  \doi{10.1109/SANER64311.2025.00077}
 
-%%% 10
-\bibitem[\protect\citeauthoryear{Jin et~al.}{2025}]{bib10}
-\begin{bchapter}
-\bauthor{\bsnm{Jin}, \binits{X.}},
-\bauthor{\bsnm{Liu}, \binits{Z.}},
-\bauthor{\bsnm{Zhang}, \binits{J.}},
-\bauthor{\bsnm{Hu}, \binits{X.}},
-\bauthor{\bsnm{Xia}, \binits{X.}}:
-\bctitle{{Tracets4J}: A traceable unit test generation dataset}.
-In: \bbtitle{2025 IEEE International Conference on Software Analysis, Evolution
-  and Reengineering},
-pp. \bfpage{757}--\blpage{767}
-(\byear{2025}).
-\doiurl{10.1109/SANER64311.2025.00077}
-\end{bchapter}
-\endbibitem
+\bibitem[{Kumar et~al.(2026)Kumar, Ali, Ahmed, Ali, and Usman}]{bib19}
+Kumar R, Ali W, Ahmed J, et~al (2026) {AgentForge}: Execution-grounded
+  multi-agent llm framework for autonomous software engineering.
+  {\href{https://arxiv.org/abs/2604.13120}{{arXiv:2604.13120}}}
 
-%%% 11
-\bibitem[\protect\citeauthoryear{Ryan et~al.}{2024}]{bib11}
-\begin{botherref}
-\oauthor{\bsnm{Ryan}, \binits{G.}},
-\oauthor{\bsnm{Jain}, \binits{S.}},
-\oauthor{\bsnm{Shang}, \binits{M.}},
-\oauthor{\bsnm{Wang}, \binits{S.}},
-\oauthor{\bsnm{Ma}, \binits{X.}},
-\oauthor{\bsnm{Ramanathan}, \binits{M.K.}},
-\oauthor{\bsnm{Ray}, \binits{B.}}:
-Code-Aware Prompting: A Study of Coverage-Guided Test Generation in Regression
-  Setting Using LLM
-(2024)
-\end{botherref}
-\endbibitem
+\bibitem[{Lee(2026)}]{bib24}
+Lee H (2026) Practical limits of autonomous test repair: A multi-agent case
+  study with llm-driven discovery and self-correction.
+  \doi{10.5281/zenodo.19944395}
 
-%%% 12
-\bibitem[\protect\citeauthoryear{Pizzorno and Berger}{2025}]{bib12}
-\begin{botherref}
-\oauthor{\bsnm{Pizzorno}, \binits{J.A.}},
-\oauthor{\bsnm{Berger}, \binits{E.D.}}:
-{CoverUp}: Effective high coverage test generation for python.
-Proceedings of the ACM on Software Engineering
-\textbf{2}
-(2025)
-\doiurl{10.1145/3729398}
-\end{botherref}
-\endbibitem
+\bibitem[{Nan et~al.(2025)Nan, Guo, Liu, and Xia}]{bib7}
+Nan Z, Guo Z, Liu K, et~al (2025) Test intention guided llm-based unit test
+  generation. In: 2025 IEEE/ACM 47th International Conference on Software
+  Engineering, pp 1026--1038, \doi{10.1109/ICSE55347.2025.00243}
 
-%%% 13
-\bibitem[\protect\citeauthoryear{Wang et~al.}{2026}]{bib13}
-\begin{barticle}
-\bauthor{\bsnm{Wang}, \binits{G.}},
-\bauthor{\bsnm{Xu}, \binits{Q.}},
-\bauthor{\bsnm{Briand}, \binits{L.}},
-\bauthor{\bsnm{Liu}, \binits{K.}}:
-\batitle{Mutation-guided unit test generation with a large language model}.
-\bjtitle{IEEE Transactions on Software Engineering}
-(\byear{2026})
-\doiurl{10.1109/TSE.2026.3682975}
-\end{barticle}
-\endbibitem
+\bibitem[{Pacheco and Ernst(2007)}]{bib2}
+Pacheco C, Ernst MD (2007) {Randoop}: Feedback-directed random testing for
+  java. In: Companion to the 22nd ACM SIGPLAN Conference on Object-Oriented
+  Programming Systems and Applications, pp 815--816,
+  \doi{10.1145/1297846.1297902}
 
-%%% 14
-\bibitem[\protect\citeauthoryear{Foster et~al.}{2025}]{bib14}
-\begin{bchapter}
-\bauthor{\bsnm{Foster}, \binits{C.}},
-\bauthor{\bsnm{Gulati}, \binits{A.}},
-\bauthor{\bsnm{Harman}, \binits{M.}},
-\bauthor{\bsnm{Harper}, \binits{I.}},
-\bauthor{\bsnm{Mao}, \binits{K.}},
-\bauthor{\bsnm{Ritchey}, \binits{J.}},
-\bauthor{\bsnm{Robert}, \binits{H.}},
-\bauthor{\bsnm{Sengupta}, \binits{S.}}:
-\bctitle{Mutation-guided llm-based test generation at meta}.
-In: \bbtitle{Proceedings of the 33rd ACM International Conference on the
-  Foundations of Software Engineering},
-pp. \bfpage{180}--\blpage{191}
-(\byear{2025}).
-\doiurl{10.1145/3696630.3728544}
-\end{bchapter}
-\endbibitem
+\bibitem[{Peruma et~al.(2020)Peruma, Almalki, Newman, Mkaouer, Ouni, and
+  Palomba}]{bib25}
+Peruma A, Almalki K, Newman CD, et~al (2020) {tsDetect}: An open source test
+  smells detection tool. In: Proceedings of the 28th ACM Joint Meeting on
+  European Software Engineering Conference and Symposium on the Foundations of
+  Software Engineering, pp 1650--1654, \doi{10.1145/3368089.3417921}
 
-%%% 15
-\bibitem[\protect\citeauthoryear{Chang et~al.}{2026}]{bib15}
-\begin{botherref}
-\oauthor{\bsnm{Chang}, \binits{P.}},
-\oauthor{\bsnm{Fang}, \binits{Y.}},
-\oauthor{\bsnm{Chen}, \binits{S.}},
-\oauthor{\bsnm{Shi}, \binits{Y.}},
-\oauthor{\bsnm{Shen}, \binits{B.}},
-\oauthor{\bsnm{Gu}, \binits{X.}}:
-Test vs Mutant: Adversarial LLM Agents for Robust Unit Test Generation
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Pizzorno and Berger(2025)}]{bib12}
+Pizzorno JA, Berger ED (2025) {CoverUp}: Effective high coverage test
+  generation for python. Proceedings of the ACM on Software Engineering 2.
+  \doi{10.1145/3729398}
 
-%%% 16
-\bibitem[\protect\citeauthoryear{Hossain and Dwyer}{2025}]{bib16}
-\begin{bchapter}
-\bauthor{\bsnm{Hossain}, \binits{S.B.}},
-\bauthor{\bsnm{Dwyer}, \binits{M.B.}}:
-\bctitle{{TOGLL}: Correct and strong test oracle generation with llms}.
-In: \bbtitle{2025 IEEE/ACM 47th International Conference on Software
-  Engineering},
-pp. \bfpage{1475}--\blpage{1487}
-(\byear{2025}).
-\doiurl{10.1109/ICSE55347.2025.00098}
-\end{bchapter}
-\endbibitem
+\bibitem[{Ryan et~al.(2024)Ryan, Jain, Shang, Wang, Ma, Ramanathan, and
+  Ray}]{bib11}
+Ryan G, Jain S, Shang M, et~al (2024) Code-aware prompting: A study of
+  coverage-guided test generation in regression setting using llm.
+  {\href{https://arxiv.org/abs/2402.00097}{{arXiv:2402.00097}}}
 
-%%% 17
-\bibitem[\protect\citeauthoryear{Hong et~al.}{2024}]{bib17}
-\begin{bchapter}
-\bauthor{\bsnm{Hong}, \binits{S.}},
-\bauthor{\bsnm{Zhuge}, \binits{M.}},
-\bauthor{\bsnm{Chen}, \binits{J.}},
-\bauthor{\bsnm{Zheng}, \binits{X.}},
-\bauthor{\bsnm{Cheng}, \binits{Y.}},
-\bauthor{\bsnm{Zhang}, \binits{C.}},
-\bauthor{\bsnm{Wang}, \binits{J.}},
-\bauthor{\bsnm{Wang}, \binits{Z.}},
-\bauthor{\bsnm{Yau}, \binits{S.K.S.}},
-\bauthor{\bsnm{Lin}, \binits{Z.}},
-\bauthor{\bsnm{Zhou}, \binits{L.}},
-\bauthor{\bsnm{Ran}, \binits{C.}},
-\bauthor{\bsnm{Xiao}, \binits{L.}},
-\bauthor{\bsnm{Wu}, \binits{C.}},
-\bauthor{\bsnm{Schmidhuber}, \binits{J.}}:
-\bctitle{{MetaGPT}: Meta programming for a multi-agent collaborative
-  framework}.
-In: \bbtitle{International Conference on Learning Representations}
-(\byear{2024})
-\end{bchapter}
-\endbibitem
+\bibitem[{Sch{\"a}fer et~al.(2024)Sch{\"a}fer, Nadi, Eghbali, and Tip}]{bib5}
+Sch{\"a}fer M, Nadi S, Eghbali A, et~al (2024) An empirical evaluation of using
+  large language models for automated unit test generation. IEEE Transactions
+  on Software Engineering 50(1):85--105. \doi{10.1109/TSE.2023.3334955}
 
-%%% 18
-\bibitem[\protect\citeauthoryear{Yang et~al.}{2024}]{bib18}
-\begin{bchapter}
-\bauthor{\bsnm{Yang}, \binits{J.}},
-\bauthor{\bsnm{Jimenez}, \binits{C.E.}},
-\bauthor{\bsnm{Wettig}, \binits{A.}},
-\bauthor{\bsnm{Lieret}, \binits{K.}},
-\bauthor{\bsnm{Yao}, \binits{S.}},
-\bauthor{\bsnm{Narasimhan}, \binits{K.}},
-\bauthor{\bsnm{Press}, \binits{O.}}:
-\bctitle{{SWE-agent}: Agent-computer interfaces enable automated software
-  engineering}.
-In: \bbtitle{Advances in Neural Information Processing Systems}
-(\byear{2024})
-\end{bchapter}
-\endbibitem
+\bibitem[{Wang et~al.(2026{\natexlab{a}})Wang, Xu, Briand, and Liu}]{bib13}
+Wang G, Xu Q, Briand L, et~al (2026{\natexlab{a}}) Mutation-guided unit test
+  generation with a large language model. IEEE Transactions on Software
+  Engineering \doi{10.1109/TSE.2026.3682975}
 
-%%% 19
-\bibitem[\protect\citeauthoryear{Kumar et~al.}{2026}]{bib19}
-\begin{botherref}
-\oauthor{\bsnm{Kumar}, \binits{R.}},
-\oauthor{\bsnm{Ali}, \binits{W.}},
-\oauthor{\bsnm{Ahmed}, \binits{J.}},
-\oauthor{\bsnm{Ali}, \binits{N.I.}},
-\oauthor{\bsnm{Usman}, \binits{S.}}:
-{AgentForge}: Execution-Grounded Multi-Agent LLM Framework for Autonomous
-  Software Engineering
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Wang et~al.(2026{\natexlab{b}})Wang, Xu, and Briand}]{bib9}
+Wang G, Xu Q, Briand LC (2026{\natexlab{b}}) {TATG}: Tracking-aware testing
+  objective for llm-based test generation.
+  {\href{https://arxiv.org/abs/2607.03194}{{arXiv:2607.03194}}}
 
-%%% 20
-\bibitem[\protect\citeauthoryear{Zhang et~al.}{2026}]{bib20}
-\begin{botherref}
-\oauthor{\bsnm{Zhang}, \binits{Q.}},
-\oauthor{\bsnm{Gao}, \binits{C.}},
-\oauthor{\bsnm{Han}, \binits{Y.}},
-\oauthor{\bsnm{Shang}, \binits{Y.}},
-\oauthor{\bsnm{Fang}, \binits{C.}},
-\oauthor{\bsnm{Chen}, \binits{Z.}},
-\oauthor{\bsnm{Xiao}, \binits{L.}}:
-{SGAgent}: Suggestion-Guided LLM-Based Multi-Agent Framework for
-  Repository-Level Software Repair
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Wang et~al.(2026{\natexlab{c}})Wang, Xu, Briand, Guo, and Liu}]{bib8}
+Wang G, Xu Q, Briand LC, et~al (2026{\natexlab{c}}) Call-chain-aware llm-based
+  test generation for java projects.
+  {\href{https://arxiv.org/abs/2604.22046}{{arXiv:2604.22046}}}
 
-%%% 21
-\bibitem[\protect\citeauthoryear{Ghosh and Abbas}{2026}]{bib21}
-\begin{bchapter}
-\bauthor{\bsnm{Ghosh}, \binits{T.}},
-\bauthor{\bsnm{Abbas}, \binits{N.}}:
-\bctitle{Retry and refine: A multi-agent framework for llm-based reliable unit
-  test generation}.
-In: \bbtitle{Artificial Intelligence XLII}.
-\bsertitle{Lecture Notes in Computer Science},
-vol. \bseriesno{16301},
-pp. \bfpage{92}--\blpage{105}.
-\bpublisher{Springer},
-\blocation{Cham}
-(\byear{2026}).
-\doiurl{10.1007/978-3-032-11402-0_7}
-\end{bchapter}
-\endbibitem
+\bibitem[{Wang et~al.(2024)Wang, Liu, Li, and Jin}]{bib6}
+Wang Z, Liu K, Li G, et~al (2024) {HITS}: High-coverage llm-based unit test
+  generation via method slicing. In: Proceedings of the 39th IEEE/ACM
+  International Conference on Automated Software Engineering, pp 1258--1268,
+  \doi{10.1145/3691620.3695501}
 
-%%% 22
-\bibitem[\protect\citeauthoryear{Xu et~al.}{2025}]{bib22}
-\begin{botherref}
-\oauthor{\bsnm{Xu}, \binits{Q.}},
-\oauthor{\bsnm{Wang}, \binits{G.}},
-\oauthor{\bsnm{Briand}, \binits{L.}},
-\oauthor{\bsnm{Liu}, \binits{K.}}:
-A Multi-Agent LLM-Based JUnit Test Generation with Strong Oracles
-(2025)
-\end{botherref}
-\endbibitem
+\bibitem[{Xu et~al.(2025)Xu, Wang, Briand, and Liu}]{bib22}
+Xu Q, Wang G, Briand L, et~al (2025) A multi-agent llm-based junit test
+  generation with strong oracles.
+  {\href{https://arxiv.org/abs/2506.02943}{{arXiv:2506.02943}}}
 
-%%% 23
-\bibitem[\protect\citeauthoryear{Zhang et~al.}{2026}]{bib23}
-\begin{botherref}
-\oauthor{\bsnm{Zhang}, \binits{Q.}},
-\oauthor{\bsnm{Shang}, \binits{Y.}},
-\oauthor{\bsnm{Gu}, \binits{S.}},
-\oauthor{\bsnm{Zhou}, \binits{J.}},
-\oauthor{\bsnm{Fang}, \binits{C.}},
-\oauthor{\bsnm{Chen}, \binits{Z.}},
-\oauthor{\bsnm{Xiao}, \binits{L.}}:
-Multi-Agent LLM Collaboration for Unit Test Generation via
-  Human-Testing-Inspired Workflows
-(2026)
-\end{botherref}
-\endbibitem
+\bibitem[{Yang et~al.(2024)Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan, and
+  Press}]{bib18}
+Yang J, Jimenez CE, Wettig A, et~al (2024) {SWE-agent}: Agent-computer
+  interfaces enable automated software engineering. In: Advances in Neural
+  Information Processing Systems,
+  {\href{https://arxiv.org/abs/2405.15793}{{arXiv:2405.15793}}}
 
-%%% 24
-\bibitem[\protect\citeauthoryear{Lee}{2026}]{bib24}
-\begin{botherref}
-\oauthor{\bsnm{Lee}, \binits{H.}}:
-Practical Limits of Autonomous Test Repair: A Multi-Agent Case Study with
-  LLM-Driven Discovery and Self-Correction.
-Zenodo
-(2026).
-\doiurl{10.5281/zenodo.19944395}
-\end{botherref}
-\endbibitem
+\bibitem[{Zhang et~al.(2026{\natexlab{a}})Zhang, Gao, Han, Shang, Fang, Chen,
+  and Xiao}]{bib20}
+Zhang Q, Gao C, Han Y, et~al (2026{\natexlab{a}}) {SGAgent}: Suggestion-guided
+  llm-based multi-agent framework for repository-level software repair.
+  {\href{https://arxiv.org/abs/2602.23647}{{arXiv:2602.23647}}}
 
-%%% 25
-\bibitem[\protect\citeauthoryear{Peruma et~al.}{2020}]{bib25}
-\begin{bchapter}
-\bauthor{\bsnm{Peruma}, \binits{A.}},
-\bauthor{\bsnm{Almalki}, \binits{K.}},
-\bauthor{\bsnm{Newman}, \binits{C.D.}},
-\bauthor{\bsnm{Mkaouer}, \binits{M.W.}},
-\bauthor{\bsnm{Ouni}, \binits{A.}},
-\bauthor{\bsnm{Palomba}, \binits{F.}}:
-\bctitle{{tsDetect}: An open source test smells detection tool}.
-In: \bbtitle{Proceedings of the 28th ACM Joint Meeting on European Software
-  Engineering Conference and Symposium on the Foundations of Software
-  Engineering},
-pp. \bfpage{1650}--\blpage{1654}
-(\byear{2020}).
-\doiurl{10.1145/3368089.3417921}
-\end{bchapter}
-\endbibitem
+\bibitem[{Zhang et~al.(2026{\natexlab{b}})Zhang, Shang, Gu, Zhou, Fang, Chen,
+  and Xiao}]{bib23}
+Zhang Q, Shang Y, Gu S, et~al (2026{\natexlab{b}}) Multi-agent llm
+  collaboration for unit test generation via human-testing-inspired workflows.
+  {\href{https://arxiv.org/abs/2607.09101}{{arXiv:2607.09101}}}
 
 \end{thebibliography}
