@@ -1,6 +1,6 @@
 # TRACE citation audit
 
-This table records the claim-to-source corrections made after reviewing the reports dated 2026-09-23. Metadata was checked against the publisher/Crossref record, the official standard or tool documentation, or the cited arXiv record. Existing keys `bib1`--`bib25` were retained; verified additions use `bib26`--`bib38`.
+This table records the claim-to-source corrections made after reviewing the reports dated 2026-09-23. Metadata was checked against the publisher/Crossref record, the official standard or tool documentation, or the cited arXiv record. Existing keys `bib1`--`bib25` were retained; verified additions use `bib26`--`bib38`. The audit status below was last reviewed on 2026-09-24.
 
 | Claim or named artifact | Verified source and metadata | Bib key |
 |---|---|---|
@@ -29,3 +29,7 @@ This table records the claim-to-source corrections made after reviewing the repo
 | `bib24` | Removed the non-resolving Zenodo DOI and cited arXiv:2605.01471 / DOI `10.48550/arXiv.2605.01471`. |
 
 The blanket `\nocite{...}` was removed. The build now confirms that all 38 bibliography entries are cited and that every citation key resolves.
+
+## Submission-status check still required
+
+ISSE's current reference guidance says that the reference list should contain only works that have been published or accepted for publication. The current bibliography encodes `bib8`, `bib9`, `bib11`, `bib15`, `bib19`, `bib20`, `bib23`, `bib24`, `bib26`, `bib27`, and `bib29` as arXiv-only entries. Their metadata and claim mapping are recorded above, but that does not establish journal-compliant publication or acceptance status. Before submission, the authors must replace each item with its publisher version and DOI when available, provide acceptance evidence, or remove/rewrite the dependent claim. This audit deliberately does not infer acceptance from an arXiv posting.

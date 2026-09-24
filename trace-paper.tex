@@ -482,6 +482,21 @@ AI participates in suggesting and checking mapping/scenario, while also evaluati
 
 B0 uses compilation and selected-JUnit results. B1 is a general reviewer. B2 consists of three specialists in plan-to-test conformance, compilation/runtime, and coverage/mutation; a deterministic aggregator creates the decision, primary cause, and repair route. In each case, B1 and B2 receive an evidence envelope with the same SHA-256. The cohort has 26 false-passing cases and 54 cases with the gold decision \texttt{REPAIR\_REQUIRED}.
 
+For metric calculation, let $N=73$, let $f_i=1$ denote a gold false-passing case, and let $\hat{f}_i=1$ denote a prediction of \texttt{REPAIR\_REQUIRED} with cause \texttt{PLAN\_TEST\_MISMATCH}, \texttt{TARGET\_NOT\_REACHED}, \texttt{ASSERTION\_ERROR}, or \texttt{WEAK\_ORACLE}. The false-passing confusion counts are $TP=\sum_i f_i\hat{f}_i$, $FP=\sum_i(1-f_i)\hat{f}_i$, $FN=\sum_i f_i(1-\hat{f}_i)$, and $TN=\sum_i(1-f_i)(1-\hat{f}_i)$. False-pass precision, recall, and F1 use their standard binary definitions. Because an abstention is neither a repair prediction nor an acceptance, False-Acceptance Rate (FAR) is reported separately:
+\begin{equation}
+\mathrm{FAR}=\frac{\sum_i f_i\,\mathbb{I}(\hat{y}_i=\texttt{VERIFIED})}{\sum_i f_i}.
+\label{eq:rq3-far}
+\end{equation}
+Here, $y_i$ and $\hat{y}_i$ are the gold and predicted decisions in $\{\texttt{VERIFIED},\texttt{REPAIR\_REQUIRED},\texttt{ABSTAIN}\}$. Decision accuracy counts an exact decision-label match over all 73 cases. With $c_i=\mathbb{I}(\hat{y}_i\neq\texttt{ABSTAIN})$, decision coverage and selective accuracy are
+\begin{equation}
+\begin{aligned}
+\mathrm{Coverage} &= \frac{\sum_i c_i}{N},\\
+\mathrm{Selective\ accuracy} &= \frac{\sum_i c_i\,\mathbb{I}(\hat{y}_i=y_i)}{\sum_i c_i}.
+\end{aligned}
+\label{eq:rq3-selective}
+\end{equation}
+Attribution Macro-F1 is the unweighted mean of cause-level F1 scores, and routing accuracy is the proportion of exact acceptable-route matches; both use only the 54 cases whose gold decision is \texttt{REPAIR\_REQUIRED}. The overall abstention rate uses all 73 cases. Invalid or partially invalid provider outputs were not removed from the GLM sensitivity cohort: their case-level aggregated decision or abstention remained in the denominator.
+
 Table~\ref{tab:rq3-safety} summarizes the safety and decision-quality outcomes.
 
 \begin{table*}[htbp]
@@ -503,7 +518,29 @@ GLM sensitivity & B2 & 26.67\% & 0.00\% & 47.95\% & 60.27\% & 77.27\% \\
 \end{tabularx}
 \end{table*}
 
-Gemini produced consistently favorable point estimates for B2: detecting 16/26 false-passing cases instead of 11/26, reducing false acceptance from 15 to 7 cases, and increasing selective accuracy by 9.73 percentage points; in return, B2 generated 8 false positives and abstained on 13 cases. On the DeepSeek repaired set, B2 eliminated 11 false acceptances, but Decision Accuracy decreased by 10.96 points due to lower coverage. GLM also reduced FAR, but had 87 invalid outputs (B1: 37; B2: 50), so it cannot be used to claim superiority.
+Table~\ref{tab:rq3-confusion} exposes the confusion counts behind the false-passing metrics. The false-accepted and positive-abstention columns are subsets of $FN$; the remaining false negatives are cases assigned another non-positive repair cause.
+
+\begin{table*}[htbp]
+\caption{False-passing confusion counts and unresolved positive cases}
+\label{tab:rq3-confusion}
+\centering
+\scriptsize
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X l *{6}{>{\centering\arraybackslash}X}@{}}
+\toprule
+Model/run & Verifier & $TP$ & $FP$ & $FN$ & $TN$ & False accepted & Positive abstentions \\
+\midrule
+Overall & B0 & 0 & 0 & 26 & 47 & 26 & 0 \\
+Gemini 3.5 & B1 & 11 & 0 & 15 & 47 & 15 & 0 \\
+Gemini 3.5 & B2 & 16 & 8 & 10 & 39 & 7 & 3 \\
+DeepSeek repaired & B1 & 14 & 0 & 12 & 47 & 11 & 1 \\
+DeepSeek repaired & B2 & 14 & 0 & 12 & 47 & 0 & 9 \\
+GLM sensitivity & B1 & 3 & 0 & 23 & 47 & 1 & 21 \\
+GLM sensitivity & B2 & 4 & 0 & 22 & 47 & 0 & 20 \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+Gemini produced consistently favorable point estimates for B2: it detected 16/26 false-passing cases instead of 11/26, had 7 rather than 15 false acceptances, and had a 9.73-percentage-point higher selective accuracy; in return, B2 generated 8 false positives and abstained on 13 cases. On the DeepSeek repaired set, B2 had 11 fewer false acceptances, but Decision Accuracy was 10.96 points lower alongside lower coverage. GLM also had a lower FAR, but had 87 invalid outputs (B1: 37; B2: 50), so it cannot be used to claim superiority.
 
 \subsubsection{Attribution, routing and uncertainty}\label{subsubsec:rq3-routing}
 
@@ -523,7 +560,7 @@ GLM sensitivity & B1 / B2 & 38.00\% / 42.98\% & 46.30\% / 55.56\% & 53.42\% / 39
 \end{tabularx}
 \end{table*}
 
-Table~\ref{tab:rq3-routing} shows that Routing increased by 24.08 percentage points on Gemini and by 9.26 percentage points on both DeepSeek and GLM. Attribution increased by only 2.35, 0.09, and 4.98 points, respectively; in particular, DeepSeek's 0.09-point increase is negligible in practical terms. These differences are descriptive point estimates, not causal evidence specifically for role separation, because B2 simultaneously uses multiple specialist calls and about three times as many input tokens as B1.
+Table~\ref{tab:rq3-routing} shows that B2's observed routing accuracy was 24.08 percentage points higher on Gemini and 9.26 points higher on both DeepSeek and GLM. Its observed attribution Macro-F1 was only 2.35, 0.09, and 4.98 points higher, respectively; in particular, DeepSeek's 0.09-point difference is negligible in practical terms. These differences are descriptive point estimates, not causal evidence specifically for role separation, because B2 simultaneously uses multiple specialist calls and about three times as many input tokens as B1.
 
 Table~\ref{tab:rq3-uncertainty} reports the paired uncertainty analyses.
 
@@ -551,7 +588,7 @@ Across the three B2 specialist calls for each of 73 cases, Gemini had 219/219 va
 
 \subsubsection{Answering RQ3}\label{subsubsec:rq3-answer}
 
-On the v2 exploratory cohort, B2 provides the strongest descriptive evidence for reducing false acceptance, especially on Gemini 3.5; routing also improves most noticeably on this model. However, B2 is not superior on all metrics, uses a larger inference budget, the DeepSeek results rely on the repaired set, and GLM has a high rate of invalid outputs. The current results support B2 as a promising safety-oriented verification layer, but do not generally confirm Contribution 3; an independent, project-aware holdout set that is frozen before scoring is needed.
+On the v2 exploratory cohort, B2 had its largest observed false-acceptance and routing differences on Gemini 3.5. However, B2 is not superior on all metrics, uses a larger inference budget, the DeepSeek results rely on the repaired set, and GLM has a high rate of invalid outputs. The current results support B2 as a promising safety-oriented verification layer, but do not generally confirm Contribution 3; an independent, project-aware holdout set that is frozen before scoring is needed.
 
 \subsection{End-to-End FullChain System Evaluation against EvoSuite}\label{subsec:fullchain-evosuite}
 
@@ -636,6 +673,24 @@ The campaign identifier is:
 \end{center}
 The campaign record refers to a paired-comparison CSV, raw records, an availability ledger, and stored SHA-256 hashes, but these materials are not included in this manuscript repository. To support independent verification, the cohort manifest, tool lock, redacted configuration, analysis script, seeds, hash manifest, and result artifacts must be released together through an immutable archive.
 
+\section{Threats to Validity}\label{sec:threats}
+
+\subsection{Construct validity}
+
+Compilation, execution, structural-target satisfaction, coverage, mutation score, and verifier decisions capture different properties and are not interchangeable proxies for test correctness. RQ2 lacks an independent compilation outcome and has missing adequacy measurements, so its coverage and mutation results are descriptive complete-case summaries. In RQ3, the false-passing definition combines four semantic failure causes, while abstention is treated separately from both repair prediction and acceptance; Equations~\ref{eq:rq3-far} and~\ref{eq:rq3-selective} make that distinction explicit. For the FullChain comparison, delivered CSR and delivered ESR are post-gate outcomes, not raw generation rates, and treatment blinding does not establish construct-neutrality of the TRACE-specific B2 gate for EvoSuite.
+
+\subsection{Internal validity}
+
+Most component configurations were run once per experimental unit, so provider variability, retry behavior, and uncontrolled nondeterminism may affect the estimates. RQ3 used an AI-assisted gold-construction process with one human annotator, selected 73 cases from 180 candidates by an agreement criterion, and did not use an independently labeled holdout. The repaired DeepSeek artifact was modified after the original freeze and is therefore sensitivity evidence only. The current studies also do not isolate the effect of specialist role separation from B2's larger inference budget, nor do they isolate individual TRACE components in the FullChain comparison.
+
+\subsection{External validity}
+
+The evaluated models, Java projects, SF110 targets, LIBRO--Defects4J error units, and RQ3 cases cover only a limited sample of repositories, faults, and provider configurations. Results may not generalize to other languages, build systems, test frameworks, model snapshots, budgets, or verifier contracts. The FullChain--EvoSuite findings are consequently restricted to the recorded cohort and TRACE-specific evaluation contract.
+
+\subsection{Conclusion and reliability validity}
+
+The data are clustered by project, while not all component analyses fully model project clustering or between-run variability. Multiple comparisons were Holm-adjusted where specified, but the exploratory RQ3 tests and complete-case RQ2 adequacy summaries do not support broad causal claims. Reproduction also depends on exact prompts, configurations, model and tool versions, seeds, target manifests, raw records, and analysis scripts. Those campaign artifacts are not included in this manuscript repository and must be released with immutable hashes before the reproducibility claim can be independently audited.
+
 \section{Conclusion and Future Work}\label{sec:conclusion}
 
 This study proposes TRACE, a framework for generating, verifying, and repairing Java unit tests based on LLMs, designed to address three main limitations of existing methods: the lack of an auditable test planning step before code generation, the lack of a stable traceability mechanism to control the scope of repair, and the lack of a specialized verification layer capable of linking tool evidence to each test scenario. TRACE implements three corresponding contributions: Auditable Test-Design-Technique-Grounded Structural Planning, Bijective Scenario Ownership and Regression-Checked Scenario-Local Repair, and Tool-Grounded Specialized Multi-Agent Verification for Scenario-Level Failure Attribution. Instead of viewing the test case as a single LLM call, the framework maintains a trace chain from the source code structure, atomic scenario, generated test method, execution evidence to the verification decision and repair route.
@@ -644,13 +699,13 @@ For RQ1, the results on 150 focal methods from SF110, totaling 600 runs across t
 
 PLANNED increased the execution success rate from 58.00\% to 88.33\% and end-to-end focal-method branch coverage from 43.51\% to 70.58\%. Improvements in execution success, structural-target satisfaction, branch coverage, and mutation score were statistically significant after Holm correction in both configurations; compilation success was significant only on DeepSeek. However, the benefits among pairs for which both methods executed successfully were clearer with Gemini and less stable with DeepSeek. Structural Planning also increased token consumption by approximately 2.03 times and lengthened wall-clock time. Thus, the results support the role of planning in improving overall pipeline reliability, but do not demonstrate that planning always produces stronger executable test suites than Direct Generation across all LLMs and conditions. For RQ2, Traceability-Guided Scenario-Local Repair achieved a core repair success of 60\%, higher than the 46\% of Failing-Test-Method Repair but lower than the 76\% of Full-Class Regeneration. The 14 percentage point advantage over FTMR is no longer statistically significant after Holm adjustment, while FCR achieving a higher success rate than TGSLR is significant. On successful repairs, TGSLR changed an average of 18.45 lines, 10.48 lines fewer than FCR; at the same time, it recorded six regression-producing runs compared to eight for FCR. However, the differences in edit scope were calculated on different sets of successful repairs, and the differences in regression are not statistically significant. RQ2 is therefore not supported inferentially; the results suggest a descriptive trade-off in locality, traceability, and edit control that requires confirmatory evaluation.
 
-For RQ3, an exploratory evaluation on 73 cases across 14 Java projects shows that the Specialized Multi-Agent Verifier is promising as a safety-oriented verification layer. On Gemini 3.5, B2 reduces the false-acceptance rate from 57.69\% of the General-Purpose Reviewer to 26.92\%, while increasing routing accuracy on cases needing fixes from 42.59\% to 66.67\%. Selective accuracy also rises from 60.27\% to 70.00\%, but decision coverage drops from 100\% to 82.19\% because B2 abstains in cases where it is not sufficiently confident. Improvements are uneven across other models, and attribution Macro-F1 only increases slightly. B2 also uses 2.97 times more input tokens than B1 on Gemini and DeepSeek. Furthermore, DeepSeek relies on repaired artifacts, GLM has a high invalid output rate, and the gold set has only one human annotator performing the final verification. Therefore, the current results support B2 as a mechanism to reduce acceptance errors and improve repair routing with promise, but it is not enough to generally confirm Contribution 3.
+For RQ3, an exploratory evaluation on 73 cases across 14 Java projects shows that the Specialized Multi-Agent Verifier is promising as a safety-oriented verification layer. On Gemini 3.5, B2 had a lower observed false-acceptance rate than the General-Purpose Reviewer (26.92\% versus 57.69\%) and a higher observed routing accuracy on cases needing fixes (66.67\% versus 42.59\%). Its selective accuracy was also higher (70.00\% versus 60.27\%), while its decision coverage was lower (82.19\% versus 100\%) because B2 abstained in cases where it was not sufficiently confident. Differences were uneven across other models, and the observed attribution Macro-F1 difference was small. B2 also used 2.97 times more input tokens than B1 on Gemini and DeepSeek. Furthermore, DeepSeek relies on repaired artifacts, GLM has a high invalid output rate, and the gold set has only one human annotator performing the final verification. Therefore, the current results provide exploratory evidence that B2 may offer a safety--coverage trade-off, but they are not enough to generally confirm Contribution 3 or attribute the observed differences causally to role specialization.
 
 In the separate integrated evaluation, FullChain and EvoSuite were compared on 450 target--repetition pairs from 150 SF110 targets. FullChain achieved a VSR of 55.11\%, compared with 28.89\% for EvoSuite; the 26.22-percentage-point difference was statistically significant in the paired permutation test ($p=0.0001$). The delivered-system ITT adequacy metrics also favored FullChain after Holm correction. Recorded treatment durations totaled 19.65 hours for FullChain and 14.73 hours for EvoSuite, while FullChain used 37,564,632 provider tokens; the corresponding EvoSuite provider-token total was not reported. This is an integrated delivered-system result under the fixed cohort, budget, toolchain, and TRACE-specific evaluation contract; it does not isolate any one TRACE component, establish gate neutrality, or establish superiority in other settings.
 
 Overall, the results indicate that the quality of unit tests generated by LLMs does not solely depend on the model's code-generation capability. The reliability of the entire process also depends on how the testing objectives are represented before generation, how each test is linked to the corresponding scenario, how the scope of edits is controlled, and how evidence from compilers, JUnit, coverage, and mutation testing is synthesized. Among the component studies, Structural Planning provides the clearest empirical evidence of improving end-to-end reliability; Scenario-Local Repair primarily offers control and traceability rather than an absolute advantage in success rate; and Specialized Multi-Agent Verification demonstrates potential value in contexts where false acceptance carries a high cost.
 
-The study still has some limitations. The experiments only used a few model configurations and most configurations were run only once per experimental unit. The data is also clustered by project, while current tests do not fully model the effects of project clustering and between-run variability. Some outcomes regarding compilation, scenario conformance, structural-target satisfaction, coverage, or mutation are still missing in each study. In particular, RQ3 is exploratory, using a gold set with AI assistance and without two independent human annotators. Therefore, the results need to be interpreted within the scope of the dataset, model, tool configuration, and budget surveyed, rather than as evidence of the universal superiority of TRACE.
+Section~\ref{sec:threats} details the construct, internal, external, conclusion, and reliability threats. In particular, the results must be interpreted within the evaluated datasets, models, tool configurations, budgets, and evidence contracts rather than as evidence of the universal superiority of TRACE.
 
 In the future, studies need to be repeated on multiple LLMs, seeds, repositories, and defect datasets, with multiple independent runs for each configuration. Evaluation should use project-aware or hierarchical statistical analysis, while also constructing a holdout for RQ3 that is frozen before running the verifier and labeled by multiple independent human annotators. Coverage and mutation evidence also need to be consistently collected at the test method level through test-coverage matrices and test-mutant matrices. Additionally, adaptive repair strategies can be investigated, in which the system prioritizes scenario-local repair but automatically switches to shared-infrastructure repair or full-class regeneration when evidence shows the defect exceeds the scope of a single scenario. Another important direction is to reduce the cost of specialized verifiers, fine-tune the abstention policy, and determine the conditions under which the safety benefits are large enough to compensate for the additional tokens and time. With these improvements, TRACE can move towards a process of generating unit tests using LLMs that is both efficient and more auditable, traceable, and reliably verifiable.
 

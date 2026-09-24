@@ -8,13 +8,13 @@ relative to this repository and is not included in the Git repository.
 
 | Item | Recorded value |
 |---|---|
-| Record verified | 2026-09-23 (Asia/Ho_Chi_Minh) |
+| Record verified | 2026-09-24 (Asia/Ho_Chi_Minh) |
 | Build method | `scripts/build-paper.ps1`: `pdflatex`, `bibtex`, `pdflatex`, `pdflatex` |
 | Local environment | Windows; MiKTeX-pdfTeX 4.27 and MiKTeX-BibTeX 4.2 (MiKTeX 26.5) |
 | Section 4.6 source DOCX SHA-256 | `E09E5E836E6D5A47AB5EBB68C26FEFE35AE8A9BE5DB0589DD07D99B433B4FF7C` |
-| PDF | `trace-paper.pdf`, 25 A4 pages |
-| PDF SHA-256 | `E09EF2BCB8B30E6E3FB0BF2BF2CEC3E2A5DDF8AD935B648A497CC006021D3012` |
-| LaTeX source SHA-256 | `05ED2FD87DA1096EE0051BBF84544590E154A64440AFA0B8DDE6887CE780B2A1` |
+| PDF | `trace-paper.pdf`, 26 A4 pages |
+| PDF SHA-256 | `F813593F605A51FF267550F642B48648EDBE6D2686309B5AAFBCB8D8F1E5D5E8` |
+| LaTeX source SHA-256 | `F1AC315049542A287FD32EA33E59AA92A804C43B51C877B63BCBA6DAD1976AB8` |
 | Bibliography SHA-256 | `A7630D11CFB09D89D4F8142D09302FAC4B94972C7052037AB416DEF38C6D91F6` |
 | Figure 1 SHA-256 | `5762E853E2871ED8D592F863AF2493F9CF3DD3592E12B8F686CBEC1701B56BE5` |
 
@@ -26,6 +26,9 @@ a different PDF hash even when the source is identical. No CI workflow or
 successful CI run is claimed here.
 
 This record does **not** validate the data behind RQ1 Tables 1--2 or the new
-FullChain--EvoSuite comparison in Section 4.6. Independently accessible,
-versioned releases of their ledgers, configurations, analysis code, scoring
-rules, and canonical reports are still needed.
+FullChain--EvoSuite comparison in Section 4.6. The RQ3 formulae and confusion
+counts were checked against the frozen Gemini, repaired DeepSeek, and GLM
+metric/CSV artifacts available in the wider workspace, but those artifacts are
+not included in this Git repository. Independently accessible, versioned
+releases of all study ledgers, configurations, analysis code, scoring rules,
+and canonical reports are still needed.
