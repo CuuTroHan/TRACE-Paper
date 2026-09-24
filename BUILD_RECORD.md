@@ -10,20 +10,23 @@ relative to this repository and is not included in the Git repository.
 |---|---|
 | Record verified | 2026-09-24 (Asia/Ho_Chi_Minh) |
 | Build method | `scripts/build-paper.ps1`: `pdflatex`, `bibtex`, `pdflatex`, `pdflatex` |
-| Local environment | Windows; MiKTeX-pdfTeX 4.27 and MiKTeX-BibTeX 4.2 (MiKTeX 26.5) |
+| Local environment | Windows; MiKTeX-pdfTeX 4.27 and MiKTeX-BibTeX 4.2 (MiKTeX 26.5); VnTeX 3.2.2 for T5-encoded Vietnamese author names |
 | Section 4.6 source DOCX SHA-256 | `E09E5E836E6D5A47AB5EBB68C26FEFE35AE8A9BE5DB0589DD07D99B433B4FF7C` |
 | PDF | `trace-paper.pdf`, 27 A4 pages |
-| PDF SHA-256 | `26E69BFF148187D2AD7C116D554E97225F70354782CF28E221D66A2F08DF8D67` |
-| LaTeX source SHA-256 | `A1C6DEFF8478CC1AC9EEF4AE31C080922349B407F01F17EDC28AC326CD2507D2` |
+| PDF SHA-256 | `C5A12CBD06D18C121EA902A6181A398E6DB92EF1CF23050537EFB68EAC4E9FC7` |
+| LaTeX source SHA-256 | `BEC02650117473E6783D939D5E5DDCD41EB6D75BB10C919DD1A94CEE7DB6CF7D` |
 | Bibliography SHA-256 | `A7630D11CFB09D89D4F8142D09302FAC4B94972C7052037AB416DEF38C6D91F6` |
 | Figure 1 SHA-256 | `5762E853E2871ED8D592F863AF2493F9CF3DD3592E12B8F686CBEC1701B56BE5` |
 
 The local build completed without LaTeX errors, undefined citations or
 references, overfull boxes, duplicate labels, or duplicate PDF destinations.
-All embedded fonts are Type 1; no Type 3 fonts remain. The generated log and a
-complete TeX package lock were not committed. Another installation can produce
-a different PDF hash even when the source is identical. No CI workflow or
-successful CI run is claimed here.
+All embedded fonts are Type 1; no Type 3 fonts remain. The title page now lists
+the five supplied authors, their FPT educational e-mail addresses, and the
+shared FPT University, Vietnam affiliation. PDF Title, Author, Subject, and
+Keywords metadata are populated. The generated log and a complete TeX package
+lock were not committed. Another installation can produce a different PDF hash
+even when the source is identical. No CI workflow or successful CI run is
+claimed here.
 
 This record does **not** validate the data behind RQ1 Tables 1--2 or the new
 FullChain--EvoSuite comparison in Section 4.6. The RQ3 formulae, class/route

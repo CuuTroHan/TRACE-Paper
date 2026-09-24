@@ -1,6 +1,7 @@
 % Springer Nature LaTeX template, version 3.1 (December 2024)
 \documentclass[pdflatex,sn-basic,Numbered,iicol]{sn-jnl}
 
+\usepackage[T5,OT1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -14,7 +15,15 @@
 \usepackage{xcolor}
 \usepackage{array}
 \usepackage{tabularx}
-\hypersetup{hypertexnames=false}
+\hypersetup{
+  hypertexnames=false,
+  pdftitle={TRACE: Structural Planning, Tool-Grounded Multi-Agent Verification, and Traceability-Guided Local Repair for LLM-Based Java Unit Testing},
+  pdfauthor={Nguyen Tuan Dung; Vuong Kieu Anh; Doan Huu Minh Quang; Ngo Duc Chinh; Tran Van Han},
+  pdfsubject={LLM-based Java unit testing},
+  pdfkeywords={unit test generation, large language models, structural planning, traceability-guided repair, multi-agent verification, Java}
+}
+
+\newcommand{\vietname}[1]{{\fontencoding{T5}\selectfont #1}}
 
 \graphicspath{{./}}
 \raggedbottom
@@ -23,9 +32,12 @@
 
 \title[TRACE]{TRACE: Structural Planning, Tool-Grounded Multi-Agent Verification, and Traceability-Guided Local Repair for LLM-Based Java Unit Testing}
 
-% Author and affiliation placeholders: replace before submission.
-\author*[1]{\fnm{First} \sur{Author}}\email{author@example.com}
-\affil*[1]{\orgdiv{Department}, \orgname{Institution}, \orgaddress{\city{City}, \country{Country}}}
+\author[1]{\sur{\vietname{Nguyễn}} \fnm{\vietname{Tuấn Dũng}}}\email{dungnthe180616@fpt.edu.vn}
+\author[1]{\sur{\vietname{Vương}} \fnm{\vietname{Kiều Anh}}}\email{anhvkhe180546@fpt.edu.vn}
+\author[1]{\sur{\vietname{Đoàn}} \fnm{\vietname{Hữu Minh Quang}}}\email{quangdhmhe181540@fpt.edu.vn}
+\author[1]{\sur{\vietname{Ngô}} \fnm{\vietname{Đức Chính}}}\email{chinhndhe180889@fpt.edu.vn}
+\author[1]{\sur{\vietname{Trần}} \fnm{\vietname{Văn Hán}}}\email{hantvhe181281@fpt.edu.vn}
+\affil[1]{\orgname{FPT University}, \orgaddress{\country{Vietnam}}}
 
 \abstract{Large language model (LLM)-based Java unit-test generation remains limited by weak structural planning, uncontrolled repair scope, and unreliable verification decisions. TRACE combines structural planning, Traceability-Guided Scenario-Local Repair (TGSLR), and tool-grounded specialized multi-agent verification. Three studies evaluated the components. In RQ1, 600 runs on 150 SF110 focal methods and two model configurations showed that planning increased aggregate execution success from 58.00\% to 88.33\%; the descriptive aggregate end-to-end branch-coverage mean increased from 43.51\% to 70.58\%, although the non-N/A denominators differed by treatment for DeepSeek. Execution success and three structural metrics improved significantly after Holm correction in both configurations, whereas compilation success improved only for DeepSeek. Conditional benefits among pairs that both executed were clear for Gemini but weak and unstable for DeepSeek, while planning used approximately 2.03 times as many tokens. In RQ2, TGSLR repaired 60\% of 100 LIBRO--Defects4J error units, compared with 46\% for local repair without scenario context and 76\% for full-class regeneration. Its advantage over local repair was not significant after Holm correction. In exploratory RQ3, specialized verification on 73 cases from 14 projects had a 26.92\% Gemini false-acceptance rate versus 57.69\% for a general reviewer and 66.67\% routing accuracy versus 42.59\%, while using 2.97 times as many input tokens. In 450 paired runs, the integrated TRACE configuration (FullChain) achieved a Verified-Suite Rate (VSR) of 55.11\% versus EvoSuite's 28.89\% under a TRACE-specific evaluation gate whose construct-neutrality has not been established. These findings characterize reliability, locality, and cost trade-offs within the evaluated settings.}
 
