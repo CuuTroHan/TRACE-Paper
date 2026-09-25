@@ -38,6 +38,6 @@ one local workspace do not constitute a public empirical release.
 - Invalid/partial-invalid case-level outputs remain in the denominator rather
   than being deleted as complete-case exclusions.
 
-This record does not verify the RQ1, RQ2, or FullChain--EvoSuite raw data and
+This record does not verify the RQ1, RQ2, or TRACE--EvoSuite raw data and
 does not replace a versioned, redacted, independently accessible empirical
 package.

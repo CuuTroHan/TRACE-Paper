@@ -1,0 +1,108 @@
+\begin{thebibliography}{33}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{\url{https://doi.org/#1}}
+\providecommand{\eprint}[2][]{\url{#2}}
+ \bibcommenthead
+
+\bibitem[{Ahammad et~al.(2025)Ahammad, Bajta, and Radgui}]{bib31}
+Ahammad A, Bajta ME, Radgui M (2025) {MAGISTER}: Llm-based test generation with role-specialized agents. In: 2025 International Conference on Intelligent Systems: Theories and Applications, pp 1--7, \doi{10.1109/SITA67914.2025.11273637}
+
+\bibitem[{Almasi et~al.(2017)Almasi, Hemmati, Fraser, and Arcuri}]{bib3}
+Almasi M, Hemmati H, Fraser G, et~al (2017) An industrial evaluation of unit test generation: Finding real faults in a financial application. In: 2017 IEEE/ACM 39th International Conference on Software Engineering: Software Engineering in Practice Track, \doi{10.1109/ICSE-SEIP.2017.27}
+
+\bibitem[{Alshahwan et~al.(2024)Alshahwan, Chheda, Finogenova, Gokkaya, Harman, Harper, Marginean, Sengupta, and Wang}]{bib32}
+Alshahwan N, Chheda J, Finogenova A, et~al (2024) Automated unit test improvement using large language models at meta. In: Companion Proceedings of the 32nd ACM International Conference on the Foundations of Software Engineering, \doi{10.1145/3663529.3663839}
+
+\bibitem[{Chang et~al.(2026)Chang, Fang, Chen, Shi, Shen, and Gu}]{bib15}
+Chang P, Fang Y, Chen S, et~al (2026) Test vs mutant: Adversarial llm agents for robust unit test generation. In: International Symposium on Software Testing and Analysis (ISSTA 2026), Research Papers, accepted research paper; proceedings DOI pending
+
+\bibitem[{Chen et~al.(2026)Chen, Wang, Yang, Yang, Chu, Zhou, Liang, Wang, and Wang}]{bib29}
+Chen J, Wang Z, Yang L, et~al (2026) Context matters: Improving the practical reliability of llm-based unit test generation. In: International Symposium on Software Testing and Analysis (ISSTA 2026), Research Papers, accepted experience paper; proceedings DOI pending
+
+\bibitem[{Chen et~al.(2024)Chen, Hu, Zhi, Han, Deng, and Yin}]{bib4}
+Chen Y, Hu Z, Zhi C, et~al (2024) {ChatUniTest}: A framework for llm-based test generation. In: Proceedings of the 32nd ACM International Conference on the Foundations of Software Engineering, Demonstrations Track, {\href{https://arxiv.org/abs/2305.04764}{{arXiv:2305.04764}}}
+
+\bibitem[{Foster et~al.(2025)Foster, Gulati, Harman, Harper, Mao, Ritchey, Robert, and Sengupta}]{bib14}
+Foster C, Gulati A, Harman M, et~al (2025) Mutation-guided llm-based test generation at meta. In: Proceedings of the 33rd ACM International Conference on the Foundations of Software Engineering, pp 180--191, \doi{10.1145/3696630.3728544}
+
+\bibitem[{Fraser and Arcuri(2011)}]{bib1}
+Fraser G, Arcuri A (2011) {EvoSuite}: Automatic test suite generation for object-oriented software. In: Proceedings of the 19th ACM SIGSOFT Symposium and the 13th European Conference on Foundations of Software Engineering, pp 416--419, \doi{10.1145/2025113.2025179}
+
+\bibitem[{Fraser and Arcuri(2014)}]{bib37}
+Fraser G, Arcuri A (2014) A large-scale evaluation of automated unit test generation using {EvoSuite}. ACM Transactions on Software Engineering and Methodology 24(2):1--42. \doi{10.1145/2685612}
+
+\bibitem[{Ghosh and Abbas(2025)}]{bib21}
+Ghosh T, Abbas N (2025) Retry and refine: A multi-agent framework for llm-based reliable unit test generation. In: Artificial Intelligence XLII, Lecture Notes in Computer Science, vol 16301. Springer Nature Switzerland, Cham, pp 92--105, \doi{10.1007/978-3-032-11402-0_7}
+
+\bibitem[{Gu et~al.(2026)Gu, Zhang, Li, Fang, Tian, Zhu, Zhou, and Chen}]{bib27}
+Gu S, Zhang Q, Li K, et~al (2026) {TestART}: Improving llm-based unit testing via co-evolution of automated generation and repair iteration. ACM Transactions on Software Engineering and Methodology \doi{10.1145/3844945}
+
+\bibitem[{Hong et~al.(2024)Hong, Zhuge, Chen, Zheng, Cheng, Zhang, Wang, Wang, Yau, Lin, Zhou, Ran, Xiao, Wu, and Schmidhuber}]{bib17}
+Hong S, Zhuge M, Chen J, et~al (2024) {MetaGPT}: Meta programming for a multi-agent collaborative framework. In: International Conference on Learning Representations, {\href{https://arxiv.org/abs/2308.00352}{{arXiv:2308.00352}}}
+
+\bibitem[{Hossain and Dwyer(2025)}]{bib16}
+Hossain SB, Dwyer MB (2025) {TOGLL}: Correct and strong test oracle generation with llms. In: 2025 IEEE/ACM 47th International Conference on Software Engineering, pp 1475--1487, \doi{10.1109/ICSE55347.2025.00098}
+
+\bibitem[{{ISO/IEC/IEEE}(2021)}]{bib30}
+{ISO/IEC/IEEE} (2021) {ISO/IEC/IEEE 29119-4:2021}: Software and systems engineering---software testing---part 4: Test techniques. International Standard, \urlprefix\url{https://www.iso.org/standard/79430.html}
+
+\bibitem[{{JaCoCo Project}(2026)}]{bib33}
+{JaCoCo Project} (2026) {JaCoCo} java code coverage library: Documentation. Project documentation, \urlprefix\url{https://www.jacoco.org/jacoco/trunk/doc/}
+
+\bibitem[{Jin et~al.(2025)Jin, Liu, Zhang, Hu, and Xia}]{bib10}
+Jin X, Liu Z, Zhang J, et~al (2025) {Tracets4J}: A traceable unit test generation dataset. In: 2025 IEEE International Conference on Software Analysis, Evolution and Reengineering, pp 757--767, \doi{10.1109/SANER64311.2025.00077}
+
+\bibitem[{{JUnit Team}(2026)}]{bib35}
+{JUnit Team} (2026) {JUnit 5} user guide. Project documentation, \urlprefix\url{https://junit.org/junit5/docs/current/user-guide/}
+
+\bibitem[{Just et~al.(2014)Just, Jalali, and Ernst}]{bib36}
+Just R, Jalali D, Ernst MD (2014) {Defects4J}: A database of existing faults to enable controlled testing studies for java programs. In: Proceedings of the 2014 International Symposium on Software Testing and Analysis, pp 437--440, \doi{10.1145/2610384.2628055}
+
+\bibitem[{Kang et~al.(2023)Kang, Yoon, and Yoo}]{bib38}
+Kang S, Yoon J, Yoo S (2023) Large language models are few-shot testers: Exploring llm-based general bug reproduction. In: 2023 IEEE/ACM 45th International Conference on Software Engineering, pp 2312--2323, \doi{10.1109/ICSE48619.2023.00194}
+
+\bibitem[{Nan et~al.(2025)Nan, Guo, Liu, and Xia}]{bib7}
+Nan Z, Guo Z, Liu K, et~al (2025) Test intention guided llm-based unit test generation. In: 2025 IEEE/ACM 47th International Conference on Software Engineering, pp 1026--1038, \doi{10.1109/ICSE55347.2025.00243}
+
+\bibitem[{Pacheco and Ernst(2007)}]{bib2}
+Pacheco C, Ernst MD (2007) {Randoop}: Feedback-directed random testing for java. In: Companion to the 22nd ACM SIGPLAN Conference on Object-Oriented Programming Systems and Applications, pp 815--816, \doi{10.1145/1297846.1297902}
+
+\bibitem[{Peruma et~al.(2020)Peruma, Almalki, Newman, Mkaouer, Ouni, and Palomba}]{bib25}
+Peruma A, Almalki K, Newman CD, et~al (2020) {tsDetect}: An open source test smells detection tool. In: Proceedings of the 28th ACM Joint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering, pp 1650--1654, \doi{10.1145/3368089.3417921}
+
+\bibitem[{{PIT Project}(2026)}]{bib34}
+{PIT Project} (2026) {PIT} mutation testing: Documentation. Project documentation, \urlprefix\url{https://pitest.org/}
+
+\bibitem[{Pizzorno and Berger(2025)}]{bib12}
+Pizzorno JA, Berger ED (2025) {CoverUp}: Effective high coverage test generation for python. Proceedings of the ACM on Software Engineering 2. \doi{10.1145/3729398}
+
+\bibitem[{Ryan et~al.(2024)Ryan, Jain, Shang, Wang, Ma, Ramanathan, and Ray}]{bib11}
+Ryan G, Jain S, Shang M, et~al (2024) Code-aware prompting: A study of coverage-guided test generation in regression setting using llm. Proceedings of the ACM on Software Engineering 1(FSE):951--971. \doi{10.1145/3643769}
+
+\bibitem[{Sch{\"a}fer et~al.(2024)Sch{\"a}fer, Nadi, Eghbali, and Tip}]{bib5}
+Sch{\"a}fer M, Nadi S, Eghbali A, et~al (2024) An empirical evaluation of using large language models for automated unit test generation. IEEE Transactions on Software Engineering 50(1):85--105. \doi{10.1109/TSE.2023.3334955}
+
+\bibitem[{Wang et~al.(2026)Wang, Xu, Briand, and Liu}]{bib13}
+Wang G, Xu Q, Briand L, et~al (2026) Mutation-guided unit test generation with a large language model. IEEE Transactions on Software Engineering \doi{10.1109/TSE.2026.3682975}
+
+\bibitem[{Wang et~al.(2024)Wang, Liu, Li, and Jin}]{bib6}
+Wang Z, Liu K, Li G, et~al (2024) {HITS}: High-coverage llm-based unit test generation via method slicing. In: Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering, pp 1258--1268, \doi{10.1145/3691620.3695501}
+
+\bibitem[{Xu et~al.(2026)Xu, Wang, Briand, and Liu}]{bib22}
+Xu Q, Wang G, Briand L, et~al (2026) Hallucination to consensus: Multi-agent llms for end-to-end junit test generation. ACM Transactions on Software Engineering and Methodology \doi{10.1145/3803418}
+
+\bibitem[{Yang et~al.(2024)Yang, Jimenez, Wettig, Lieret, Yao, Narasimhan, and Press}]{bib18}
+Yang J, Jimenez CE, Wettig A, et~al (2024) {SWE-agent}: Agent-computer interfaces enable automated software engineering. In: Advances in Neural Information Processing Systems, {\href{https://arxiv.org/abs/2405.15793}{{arXiv:2405.15793}}}
+
+\bibitem[{Yang et~al.(2025)Yang, Xu, and Wang}]{bib28}
+Yang R, Xu X, Wang R (2025) {TestLoter}: A logic-driven framework for automated unit test generation and error repair using large language models. Journal of Computer Languages 84:101348. \doi{10.1016/j.cola.2025.101348}
+
+\bibitem[{Yuan et~al.(2024)Yuan, Liu, Ding, Wang, Chen, Peng, and Lou}]{bib26}
+Yuan Z, Liu M, Ding S, et~al (2024) Evaluating and improving chatgpt for unit test generation. Proceedings of the ACM on Software Engineering 1(FSE):1703--1726. \doi{10.1145/3660783}
+
+\bibitem[{Zhang et~al.(2026)Zhang, Gao, Han, Shang, Fang, Chen, and Xiao}]{bib20}
+Zhang Q, Gao C, Han Y, et~al (2026) {SGAgent}: Suggestion-guided llm-based multi-agent framework for repository-level software repair. ACM Transactions on Software Engineering and Methodology \doi{10.1145/3818617}
+
+\end{thebibliography}

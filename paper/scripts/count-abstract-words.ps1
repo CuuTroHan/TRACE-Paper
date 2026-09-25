@@ -7,8 +7,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repositoryRoot = Split-Path -Parent $scriptDirectory
-$mainPath = Join-Path $repositoryRoot $MainFile
+$paperRoot = Split-Path -Parent $scriptDirectory
+$mainPath = Join-Path $paperRoot $MainFile
 $source = Get-Content -LiteralPath $mainPath -Raw -Encoding UTF8
 $match = [regex]::Match($source, '\\abstract\{(?<abstract>.*?)\}\s*\\keywords', 'Singleline')
 

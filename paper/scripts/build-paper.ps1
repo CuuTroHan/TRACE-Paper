@@ -7,11 +7,15 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $scriptDirectory = Split-Path -Parent $MyInvocation.MyCommand.Path
-$repositoryRoot = Split-Path -Parent $scriptDirectory
-$mainPath = Join-Path $repositoryRoot $MainFile
+$paperRoot = Split-Path -Parent $scriptDirectory
+$templateRoot = Join-Path (Split-Path -Parent $paperRoot) 'template'
+$mainPath = Join-Path $paperRoot $MainFile
 
 if (-not (Test-Path -LiteralPath $mainPath -PathType Leaf)) {
     throw "Main LaTeX file not found: $mainPath"
+}
+if (-not (Test-Path -LiteralPath (Join-Path $templateRoot 'sn-jnl.cls') -PathType Leaf)) {
+    throw "Springer template class not found: $templateRoot"
 }
 
 foreach ($toolName in @('pdflatex', 'bibtex')) {
@@ -21,11 +25,16 @@ foreach ($toolName in @('pdflatex', 'bibtex')) {
 }
 
 $jobName = [IO.Path]::GetFileNameWithoutExtension($MainFile)
-$logPath = Join-Path $repositoryRoot "$jobName.log"
-$pdfPath = Join-Path $repositoryRoot "$jobName.pdf"
+$logPath = Join-Path $paperRoot "$jobName.log"
+$pdfPath = Join-Path $paperRoot "$jobName.pdf"
+$oldTexInputs = $env:TEXINPUTS
+$oldBstInputs = $env:BSTINPUTS
+$pathSeparator = [IO.Path]::PathSeparator
 
-Push-Location $repositoryRoot
+Push-Location $paperRoot
 try {
+    $env:TEXINPUTS = "$templateRoot$pathSeparator$oldTexInputs"
+    $env:BSTINPUTS = "$templateRoot$pathSeparator$oldBstInputs"
     Write-Host "pdflatex: $((& pdflatex --version | Select-Object -First 1))"
     Write-Host "bibtex:   $((& bibtex --version | Select-Object -First 1))"
 
@@ -66,5 +75,7 @@ try {
     Write-Host "SHA-256: $($hash.Hash)"
 }
 finally {
+    $env:TEXINPUTS = $oldTexInputs
+    $env:BSTINPUTS = $oldBstInputs
     Pop-Location
 }
