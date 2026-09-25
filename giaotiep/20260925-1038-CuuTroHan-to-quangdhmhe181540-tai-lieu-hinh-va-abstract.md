@@ -7,6 +7,23 @@ references, chất lượng Figure 1 và giới hạn abstract.
 
 **Mức ưu tiên:** P0 trước submission.
 
+## Quy tắc làm song song và phạm vi file
+
+- Dùng clone hoặc worktree riêng, tạo branch từ `main` mới nhất, ví dụ
+  `work/quang-references-figure`; chỉ commit file phản hồi mới mang tên duy nhất
+  trong `giaotiep/` và các bản
+  bàn giao thuộc `handoff/quangdhmhe181540/` nếu cần lưu trong repo.
+- Bibliography đã rà soát phải mang tên riêng như
+  `handoff/quangdhmhe181540/trace-references-reviewed.bib`; figure mới cũng
+  đặt trong thư mục đó, không ghi đè `Fig1.png` hoặc tên figure đang được TeX
+  dùng. Abstract và caption gửi dưới dạng văn bản/đoạn LaTeX trong file bàn giao.
+- Không sửa hoặc commit `trace-paper.tex`, `trace-references.bib`,
+  `trace-paper.pdf`, `Fig1.png`, `BUILD_RECORD.md`, `CITATION_AUDIT.md`,
+  `RQ3_PROVENANCE.md` hay file giao việc của người khác.
+- Push branch riêng và mở PR tới `main` để Hán xem; không push thẳng `main` và
+  không tự merge PR. Đồng bộ branch trước khi bàn giao nếu `main` đã tiến lên.
+  Hán là người duy nhất thay source chính và build bản PDF cuối.
+
 ## Phần A -- Kiểm tra toàn bộ references
 
 ### Hiện trạng
@@ -32,11 +49,12 @@ nhận. `CITATION_AUDIT.md` đang đánh dấu 11 key arXiv-only:
 
 - Tra cứu Crossref, DOI, DBLP, ACM/IEEE/Springer/Elsevier và website chính thức.
 - So sánh title, author, year, venue, pages và DOI giữa arXiv/publisher version.
-- Cập nhật `trace-references.bib` và `CITATION_AUDIT.md` sau khi xác minh.
+- Tạo `trace-references-reviewed.bib` và bảng thay đổi citation có dẫn chứng
+  trong phạm vi bàn giao của Quang để Hán tích hợp sau khi xác minh.
 - Nếu chưa có publisher/accepted version, liệt kê chính xác các câu đang cite
   source đó và đề xuất bản viết lại/loại citation để Quang và nhóm duyệt.
-- Kiểm tra citation order, cited/uncited key, DOI link và access date; build lại
-  bibliography.
+- Kiểm tra citation order, cited/uncited key, DOI link và access date trên bản
+  bibliography đề xuất; báo lỗi build cho Hán nếu có.
 
 ### Agent không thể tự làm thay Quang
 
@@ -71,8 +89,8 @@ paper. Đây là color/combination artwork có nhiều chữ; ISSE nêu mức t�
   chữ ở final size.
 - Export EPS/PDF vector tương thích `pdflatex`, hoặc bitmap RGB 600 dpi khi
   vector không khả dụng.
-- Đổi `\includegraphics`, mở rộng caption để mô tả đủ bảy block và build/kiểm
-  tra trực quan.
+- Soạn đề xuất đổi `\includegraphics` và caption mô tả đủ bảy block; render
+  figure mới ở kích thước in để Hán xem trước khi tích hợp.
 - Kiểm tra grayscale legibility và bảo đảm caption nằm trong TeX, không chèn
   caption vào artwork.
 
@@ -107,18 +125,20 @@ cách token hóa khác. ISSE yêu cầu 150--250 từ và không cho abbreviatio
 - Tạo bản abstract khoảng 220--230 từ, không thêm dữ kiện và không đổi số.
 - Loại/giải nghĩa abbreviation, kiểm tra bằng nhiều cách đếm từ.
 - So sánh từng câu với Results/Conclusion để phát hiện claim vượt bằng chứng.
-- Chèn bản đã duyệt, build và cập nhật PDF metadata nếu cần.
+- Bàn giao abstract đã duyệt cùng kết quả đếm từ và danh sách câu cần thay;
+  Hán chèn vào bản chính, build và cập nhật PDF metadata nếu cần.
 
 ## Đầu ra Quang phải bàn giao
 
 - [ ] Một file phản hồi trong `giaotiep/` gửi `to-CuuTroHan`.
 - [ ] Bảng 11 arXiv key: publisher/accepted/rewrite/remove, kèm URL/DOI hoặc
   evidence.
-- [ ] `trace-references.bib` đã xác minh hoặc danh sách chính xác các claim cần
-  viết lại.
+- [ ] Bản `trace-references-reviewed.bib` trong thư mục bàn giao hoặc danh sách
+  chính xác các claim cần viết lại; không ghi đè bibliography chính.
 - [ ] Source vector của Figure 1, thông tin phần mềm/licence/AI-use và caption
   đã duyệt.
 - [ ] Abstract 220--230 từ đã được nhóm xác nhận về số liệu và claim.
+- [ ] Link branch/PR chỉ gồm file thuộc phạm vi Quang, kèm commit SHA.
 
 ## Tiêu chí hoàn thành
 

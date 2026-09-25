@@ -9,6 +9,22 @@ nếu các tác giả chưa xác nhận nội dung pháp lý/học thuật tươ
 **Mức ưu tiên:** P0, submission có thể bị trả lại nếu thiếu declarations phù
 hợp.
 
+## Quy tắc làm song song và phạm vi file
+
+- Dùng clone hoặc worktree riêng, tạo branch từ `main` mới nhất, ví dụ
+  `work/chinh-declarations`; chỉ commit file phản hồi mới mang tên duy nhất trong
+  `giaotiep/` và bản nháp hoặc
+  biểu mẫu thuộc `handoff/Duc-Chinh1907/` nếu cần lưu trong repo.
+- Không sửa hoặc commit `trace-paper.tex`, `trace-references.bib`,
+  `trace-paper.pdf`, `Fig1.png`, `BUILD_RECORD.md`, `CITATION_AUDIT.md`,
+  `RQ3_PROVENANCE.md` hay file giao việc của người khác. Gửi nguyên văn các
+  đoạn đã được tác giả duyệt kèm vị trí cần thay vào file bàn giao.
+- Push branch riêng và mở PR tới `main` để Hán xem; không push thẳng `main` và
+  không tự merge PR. Đồng bộ branch trước khi bàn giao nếu `main` đã tiến lên.
+- Funding, conflicts, ethics, CRediT và AI-use có thể thu thập song song; phần
+  Data/Code Availability chốt sau khi Dũng gửi release URL/DOI. Hán là người
+  duy nhất chèn các đoạn cuối vào manuscript.
+
 ## Hiện trạng cần xử lý
 
 Các mục sau trong `trace-paper.tex` vẫn ghi `To be completed by the authors`:
@@ -107,8 +123,8 @@ hành yêu cầu minh bạch và trách nhiệm con người; không được đ
    Chính cung cấp; đối chiếu với Methods để tránh mâu thuẫn.
 4. Kiểm tra Data/Code Availability URL, DOI, licence và tính nhất quán với
    replication package của Dũng.
-5. Chèn các đoạn đã duyệt vào LaTeX, loại toàn bộ placeholder, build PDF và kiểm
-   tra trang declarations.
+5. Soạn block LaTeX đề xuất, đánh dấu từng placeholder cần thay và cung cấp
+   checklist để Hán chèn, build PDF và kiểm tra trang declarations.
 6. Tạo bản đối chiếu để các tác giả ký/ghi “approved” trước khi commit cuối.
 
 ## Agent không thể tự quyết định hoặc tự bịa
@@ -127,12 +143,14 @@ hành yêu cầu minh bạch và trách nhiệm con người; không được đ
 - [ ] AI-use inventory và AI Declaration đã được cả nhóm duyệt.
 - [ ] URL/DOI Data và Code Availability đã kiểm tra truy cập.
 - [ ] Xác nhận bằng văn bản: tất cả tác giả đọc và phê duyệt declarations.
+- [ ] Link branch/PR chỉ gồm file thuộc phạm vi Chính, kèm commit SHA.
 
 ## Tiêu chí hoàn thành
 
-Không còn `To be completed by the authors`; mọi câu khai báo đều có nguồn xác
-nhận từ tác giả, khớp submission interface và không mâu thuẫn với Methods,
-replication package hoặc author contributions.
+Bản bàn giao có câu thay thế cho mọi `To be completed by the authors`; mọi câu
+khai báo đều có nguồn xác nhận từ tác giả, khớp submission interface và không
+mâu thuẫn với Methods, replication package hoặc author contributions. Hán kiểm
+tra placeholder đã biến mất sau khi tích hợp.
 
 ## Phụ thuộc và bàn giao tiếp theo
 

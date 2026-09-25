@@ -8,6 +8,27 @@ ra của Dũng, Chính và Quang. Nhiệm vụ này không thay thế việc m�
 
 **Mức ưu tiên:** P0 và bước cuối trước khi upload lên cổng ISSE.
 
+## Quy tắc làm song song và tích hợp
+
+- Dũng, Chính và Quang làm trên ba clone/worktree và branch riêng; mỗi người
+  chỉ commit file bàn giao mới trong `giaotiep/` và thư mục
+  `handoff/<username>/` của mình. Ba người
+  không push thẳng `main`, không tự merge PR và không cùng sửa file bản thảo.
+- Hán xem từng PR, kiểm tra phạm vi file rồi merge các file bàn giao không
+  chồng lặp. Dũng và Quang có thể làm đồng thời; Chính làm các khai báo khác
+  song song và nhận URL/DOI từ Dũng để chốt Data/Code Availability. Không cần
+  xếp hàng công việc, chỉ xếp thứ tự **tích hợp** khi dữ liệu đã sẵn sàng.
+- Sau khi nhận bản đã duyệt, Hán hoặc agent làm trong một branch tích hợp riêng
+  (ví dụ `work/han-submission`) và là đầu mối duy nhất sửa `trace-paper.tex`,
+  `trace-references.bib`, `Fig1.png` hoặc figure thay thế, `trace-paper.pdf`,
+  `BUILD_RECORD.md`, `CITATION_AUDIT.md` và `RQ3_PROVENANCE.md`.
+- Chốt số liệu/release của Dũng trước; sau đó chèn declarations của Chính và
+  bibliography/figure/abstract của Quang theo phần đã được nhóm phê duyệt.
+  Tạo một PR tích hợp, chạy fresh build và audit PDF trước khi merge vào `main`.
+  Nếu các PR bàn giao đến khác thứ tự, vẫn nhận và xem từng PR theo phạm vi file.
+- Nếu ai cần sửa file chung vì một lỗi phát hiện được, họ ghi line, lý do và
+  bản vá đề xuất trong file bàn giao; Hán áp dụng khi tích hợp.
+
 ## Phần A -- Chốt title page và quyền đại diện nhóm
 
 ### Hán cần cung cấp cho agent
@@ -76,6 +97,8 @@ ra của Dũng, Chính và Quang. Nhiệm vụ này không thay thế việc m�
 - [ ] Từ Chính: toàn bộ declarations, CRediT, AI-use disclosure và xác nhận của
   năm tác giả.
 - [ ] Từ Quang: bibliography hợp lệ, Figure 1 production-ready và abstract cuối.
+- [ ] Mỗi PR bàn giao chỉ chứa file thuộc phạm vi của người gửi; lưu link PR,
+  commit SHA và trạng thái phê duyệt của từng đầu ra.
 
 Không đóng manuscript nếu một trong ba đầu ra vẫn ghi “sẽ bổ sung sau”.
 
@@ -137,6 +160,8 @@ Không đóng manuscript nếu một trong ba đầu ra vẫn ghi “sẽ bổ s
 - [ ] Cover letter và reviewer suggestions đã duyệt.
 - [ ] Submission ZIP, compiled PDF, checksum manifest và fresh-build log.
 - [ ] Xác nhận cuối của cả năm tác giả.
+- [ ] PR tích hợp đã được kiểm tra rồi mới merge vào `main`; `main` không nhận
+  commit trực tiếp từ ba branch bàn giao.
 
 ## Nguồn chính thức cần tuân theo
 

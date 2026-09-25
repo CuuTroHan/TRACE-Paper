@@ -10,6 +10,23 @@ cục bộ và SHA-256 trong workspace của nhóm.
 **Mức ưu tiên:** P0/P1, phải hoàn thành trước khi chốt Data Availability và Code
 Availability.
 
+## Quy tắc làm song song và phạm vi file
+
+- Dùng clone hoặc worktree riêng, tạo branch từ `main` mới nhất, ví dụ
+  `work/dung-replication`; chỉ commit file phản hồi mới mang tên duy nhất trong
+  `giaotiep/` và artifact thuộc
+  `handoff/dungng2808/` nếu cần lưu trong repo. Replication package lớn có thể
+  nằm ở kho/release riêng; file phản hồi ghi URL và checksum.
+- Không sửa hoặc commit các file tích hợp chung: `trace-paper.tex`,
+  `trace-references.bib`, `trace-paper.pdf`, `Fig1.png`, `BUILD_RECORD.md`,
+  `CITATION_AUDIT.md`, `RQ3_PROVENANCE.md` hay file giao việc của người khác.
+- Push branch riêng và mở PR tới `main` để Hán xem; không push thẳng `main` và
+  không tự merge PR. Nếu người khác đã cập nhật `main`, đồng bộ branch trước khi
+  bàn giao. Không ghi đè thay đổi của người khác.
+- Có thể phối hợp với Chính ngay bằng URL/DOI và bản statement dự thảo; việc
+  này không cần chờ thứ tự merge. Hán là người duy nhất chèn nội dung đã duyệt
+  vào manuscript ở bước tích hợp cuối.
+
 ## Hiện trạng cần xử lý
 
 - Repository bài báo chưa chứa raw records, cohort/target manifest, prompt,
@@ -71,8 +88,8 @@ Availability.
    định dữ liệu nào là bí mật.
 6. Soạn Data Availability và Code Availability bằng tiếng Anh từ URL/DOI và
    điều kiện truy cập đã được Dũng xác nhận.
-7. Cập nhật manuscript, bibliography cho dataset DOI và build/kiểm tra PDF sau
-   khi nhóm phê duyệt nội dung release.
+7. Soạn đoạn thay thế và vị trí cần sửa trong manuscript/bibliography cho
+   dataset DOI để Hán tích hợp sau khi nhóm phê duyệt nội dung release.
 
 ## Agent không thể tự quyết định hoặc tự bịa
 
@@ -91,6 +108,8 @@ Availability.
 - [ ] Bảng ánh xạ Tables 1--12 sang file/script tạo ra chúng.
 - [ ] Kết quả audit RQ1 N/A và FullChain--EvoSuite pre-gate/harness.
 - [ ] Hai đoạn tiếng Anh đã duyệt: Data Availability và Code Availability.
+- [ ] Link branch/PR chỉ gồm file thuộc phạm vi Dũng; ghi commit SHA và URL
+  release/DOI trong file bàn giao.
 
 ## Tiêu chí hoàn thành
 
