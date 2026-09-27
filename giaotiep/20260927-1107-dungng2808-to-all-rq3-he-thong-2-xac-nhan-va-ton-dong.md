@@ -44,6 +44,8 @@ Dũng xác nhận script và AI annotation được nhắc trong trao đổi tr�
 
 Các kiểm tra file ở mục 1 chỉ xác nhận prediction, gold JSON và metric đang có trong workspace ghép khớp theo case. Việc xác nhận ai đã phê duyệt từng nhãn gold cuối thuộc hồ sơ của nhóm, chưa được kiểm tra trong snapshot này.
 
+**Bổ sung sau snapshot:** Dũng xác nhận nhóm đã trao đổi và chốt nhãn cuối bằng lời nói, không lập biên bản hay bảng duyệt theo từng case. Vì vậy, câu “không có quyền truy cập hồ sơ gán nhãn cuối” ở trên chỉ phản ánh hiểu biết tại thời điểm 11:07; không có hồ sơ viết riêng để cung cấp. Các file gold cuối và hash vẫn cho phép đối chiếu số liệu, nhưng không chứng minh độc lập được ai chốt từng nhãn hoặc mức đồng thuận giữa người gán nhãn.
+
 ## 4. Việc còn tồn đọng để xử lý sau
 
 1. Tìm nguyên nhân và quyết định cách xử lý 37 `INVALID_OUTPUT` B1 cùng 50 `PARTIAL_INVALID_OUTPUT` B2 trong run GLM Hệ thống 2. Không diễn giải `false-acceptance rate = 0` của B2 như bằng chứng an toàn tuyệt đối khi run còn các output không hoàn toàn hợp lệ.

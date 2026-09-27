@@ -30,3 +30,7 @@ Dung vui lòng kiểm tra các thay đổi dưới đây và phản hồi rõ m�
 5. Xin kiểm tra PDF cuối, nhất là bốn bảng RQ3 và phần Threats/Conclusion, rồi ghi lại mục nào cần sửa cùng đề xuất câu chữ hoặc số liệu chính xác.
 
 Tài liệu này là yêu cầu **rà soát**, không phải xác nhận thay cho Dũng hoặc nhóm rằng bản sửa đã được phê duyệt.
+
+## Bổ sung sau phản hồi của Dũng
+
+Dũng xác nhận nhóm chốt nhãn gold cuối qua trao đổi bằng lời nói và không lưu biên bản/bảng duyệt theo từng case. Do đó, câu ở mục 5 rằng hồ sơ ấy “không ở trong workspace” và câu hỏi về khả năng cung cấp ledger ở mục rà soát số 2 đã được làm rõ: hồ sơ viết đó không tồn tại. [Bản thảo hiện tại](../paper/trace-paper.tex) và [RQ3 provenance](../paper/RQ3_PROVENANCE.md) đã được sửa để ghi đúng giới hạn này. Không suy từ các file AI annotation thử nghiệm rằng chúng thay cho quyết định cuối của nhóm; cũng không ghi ngược một biên bản như thể được tạo cùng lúc với quá trình gán nhãn.

@@ -31,10 +31,10 @@ The Qwen source remains under the local package's historical
 revision now uses it. The directory name is not a quality judgment. Its
 manifest and metrics report the same frozen cohort hash, 73 evaluation cases,
 219 prediction rows and zero case-level output errors. Qwen B2 has 219/219
-valid specialist findings. The final gold was manually reviewed by the author
-team according to the author; the team's adjudication ledger was not available
-in this workspace, so human agreement and label validity were not independently
-checked.
+valid specialist findings. According to the author, the team reviewed and
+settled the final gold labels through oral discussion and kept no case-level
+record of individual judgments or adjudication. Human agreement and label
+validity therefore could not be independently checked from these artifacts.
 
 ## Model selection and excluded run
 

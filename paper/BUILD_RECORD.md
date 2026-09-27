@@ -1,6 +1,30 @@
 # Local LaTeX build record
 
-## Current revision: 2026-09-27 (RQ3 Qwen sensitivity)
+## Current revision: 2026-09-27 (RQ3 oral gold-review disclosure)
+
+The author clarified that the team discussed and settled the final RQ3 gold
+labels orally and did not keep a case-level record of its review. The RQ3
+method, validity, and conclusion language now states this directly. The frozen
+gold, predictions, metrics, and experimental results were not changed.
+
+| Item | Recorded value |
+|---|---|
+| Build environment | Windows, MiKTeX 26.5 BibTeX and installed pdfLaTeX; Springer class/options retained |
+| Build command | From `paper/`, `pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory <temporary-dir> trace-paper.tex`, then `bibtex <temporary-dir>/trace-paper`, then `pdflatex` twice; `TEXINPUTS`/`BSTINPUTS` pointed at `../template` and `BIBINPUTS` at `paper/` |
+| PDF | `trace-paper.pdf`, 28 A4 pages |
+| PDF SHA-256 | `E0A791825C93C25FB89C9B75C9EE010DD14EFCFEC9EF91F80BF3BE20A2935335` |
+| LaTeX SHA-256 | `13E1F00DC6E9B91BA4C005F4FDB8938ADCFB867D379A4AA48A77B5FEF7734A9E` |
+| Generated BBL SHA-256 | `70AD7392F46362101AAF0352649BFF9F8A14425F7840595BE8992E0C7877840B` |
+
+The final pdfLaTeX log has no LaTeX errors, unresolved citations/references,
+overfull boxes, or missing-character warnings. Pages 12, 17, 23, and 25,
+which contain the changed RQ3 wording, were rendered and visually inspected.
+The Qwen bootstrap interval was independently regenerated from the frozen
+prediction JSON and gold using `score_exploratory_v2.ps1` with 5,000
+resamples and seed `20260826`; it matched the reported B2-minus-B1
+false-pass F1 interval `[0.000000, 0.372924]`.
+
+## Earlier revision: 2026-09-27 (RQ3 Qwen sensitivity)
 
 This revision replaces incomplete GLM numerical rows with the complete
 Qwen3.8 Flash System 2 run, discloses that Qwen was selected after inspecting
