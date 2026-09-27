@@ -1,5 +1,7 @@
 # Audit định dạng Springer/ISSE và nội dung nghiên cứu của TRACE
 
+> **Ghi chú kiểm tra lại ngày 2026-09-27:** Source/PDF/bibliography/Figure 1 vẫn khớp các hash trong báo cáo này. Tuy nhiên, một số cách diễn đạt và kết luận về dữ liệu cần cập nhật. Xem [bản đối chiếu chi tiết, các điểm cần sửa và thông tin cần tác giả cung cấp](20260927-0943-dungng2808-to-all-doi-chieu-audit-voi-trace-va-bang-chung.md). Nội dung bên dưới được giữ như bản audit lịch sử ngày 2026-09-25; đặc biệt không dùng nhận định “thiếu compilation/time của RQ2” hoặc “chưa có artifact” như kết luận chung cho toàn workspace.
+
 - **Người gửi:** `dungng2808`
 - **Người nhận:** `all`
 - **Thời gian:** 2026-09-25 09:48 (Asia/Ho_Chi_Minh)

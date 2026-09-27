@@ -1,5 +1,52 @@
 # Local LaTeX build record
 
+## Current revision: 2026-09-27
+
+This section supersedes the historical record below for the current source and
+PDF. The revision reconciles the manuscript with the exports in the wider
+`paper-2` workspace. It does not certify the underlying experiments or submission
+readiness. Figure 1's raster is unchanged; its caption has been expanded.
+
+| Item | Recorded value |
+|---|---|
+| Build environment | macOS; Tectonic 0.17.0, XeTeX/xdvipdfmx backend; original Springer class/options retained |
+| Build command, from `paper/` | `tectonic -Z search-path=../template --keep-logs --keep-intermediates --outdir /tmp/trace-revision-rBeBiy trace-paper.tex` |
+| PDF | `trace-paper.pdf`, 28 A4 pages |
+| PDF SHA-256 | `0cb75db6be6b2f7e6ca09d5ab34b51075a11b14b0791e0cd2ae987e626acec2c` |
+| LaTeX SHA-256 | `d7e380d14d3a8bbac2797a8c9e0de4391174e083040c6868db42f7d810e716d2` |
+| Generated BBL SHA-256 | `aa9b382ba0ec95a358cc2a57fc1bbf79421e571c06405f2269bb6925284c7a23` |
+| Bibliography/Figure 1 | Unchanged; hashes in the historical record below |
+| Statistical environment | Python 3.12, NumPy 2.5.3, SciPy 1.18.1; .NET SDK 8.0.423, net8.0 verification project |
+
+The build completed without errors, unresolved citations/references, missing
+characters, duplicate labels/destinations, or overfull boxes. Underfull-box
+warnings remain; the bundled `algorithm.sty` also emits a source-encoding
+warning. All 28 pages were rendered and visually inspected; after preventing
+split bibliography entries, pages 26-28 were re-rendered and checked. No clipped
+tables, overlaps, or detached bibliography DOI fragments were observed. The PDF
+has 12 tables, one figure, 33 cited bibliography entries, and embedded Type 1C
+fonts, with no Type 3 fonts. Title/author/subject/keyword metadata are populated.
+Six author-supplied declaration/acknowledgement placeholders intentionally
+remain. Figure 1 is still the original raster, not a new high-resolution master.
+
+Numerical verification is documented in [verification/README.md](verification/README.md).
+It includes RQ1 primary and conditional paired tests; RQ2 summaries, ten Holm
+tests, and corrected effect-size directions; RQ3 metric-report extraction; and
+recomputed FullChain Tables 11-12 using the existing statistical engines on the
+450-pair CSV. This is not an independent rerun of Java/JUnit/JaCoCo/PIT or of the
+LLM campaigns. RQ2 bootstrap intervals and RQ3 gold-label scoring were not
+independently regenerated in this revision. Inputs and original FullChain
+engines are external to this nested repository, so the verification folder is
+not a standalone public reproducibility package.
+
+The previous TinyTeX/pdfLaTeX executable was unavailable in the current shell;
+this build used Tectonic instead. No TeX Live 2021 compatibility, locked TeX
+environment, or CI build is claimed. The Section 4.6 numbers were checked against
+the CSV, not against the historical DOCX hash. The current external-to-manuscript
+DOCX is not treated as the numerical source of truth.
+
+## Historical record: 2026-09-25 (not the current PDF)
+
 This is a record of the TRACE PDF built from the current LaTeX and BibTeX
 sources, including unaccented author names and the updated reference list.
 Figure 1 uses its original `Fig1.png` and original caption by request. This
