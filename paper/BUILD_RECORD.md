@@ -1,6 +1,28 @@
 # Local LaTeX build record
 
-## Current revision: 2026-09-27 (RQ3 oral gold-review disclosure)
+## Current revision: 2026-09-27 (RQ3 dataset construction clarification)
+
+The RQ3 design section now explains that the 73 cases trace to developer-written
+tests in pinned public Java repositories: eight natural cases and 65 controlled
+challenges. The intervention can affect test source, the stated scenario, or
+the evidence exposed to the verifier. The corresponding provenance and request
+for author review were updated. Gold labels, predictions, metrics, and result
+tables were not changed.
+
+| Item | Recorded value |
+|---|---|
+| Build environment | Windows, MiKTeX 26.5 BibTeX and installed pdfLaTeX; Springer class/options retained |
+| Build command | From `paper/`, `pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory <temporary-dir> trace-paper.tex`, then `bibtex <temporary-dir>/trace-paper`, then `pdflatex` twice; `TEXINPUTS`/`BSTINPUTS` pointed at `../template` and `BIBINPUTS` at `paper/` |
+| PDF | `trace-paper.pdf`, 28 A4 pages |
+| PDF SHA-256 | `CDCA9CBFDC0CC4792244B85CEDDE348888D086AD64D06732FB2CD6A23456FBA7` |
+| LaTeX SHA-256 | `3E3B32C192E566AC7145C08F135EF9E17C8A071FD0262004FB14F137C16863FF` |
+| Generated BBL SHA-256 | `70AD7392F46362101AAF0352649BFF9F8A14425F7840595BE8992E0C7877840B` |
+
+The final pdfLaTeX log has no LaTeX errors, unresolved citations/references,
+overfull boxes, or missing-character warnings. Pages 17 and 18, which contain
+the changed RQ3 methods text, were rendered and visually inspected.
+
+## Earlier revision: 2026-09-27 (RQ3 oral gold-review disclosure)
 
 The author clarified that the team discussed and settled the final RQ3 gold
 labels orally and did not keep a case-level record of its review. The RQ3

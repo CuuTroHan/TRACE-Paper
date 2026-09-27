@@ -14,6 +14,16 @@ one local workspace do not constitute a public empirical release.
 | B2 deterministic aggregator | `HeThong2_ThucNghiem_TongHop/01_HE_THONG_2/RQ3_Evaluator_Wpf/B2Aggregator.cs` | `E8991CB5C3D0097249BB0A38965E16DF144FD254F5B09D4AD967EA10B57D07D3` |
 | RQ3 protocol v2 | `HeThong2_ThucNghiem_TongHop/01_HE_THONG_2/protocol/RQ3_PROTOCOL_V2.md` | `6A64E36E1833EDE746EF0FDEFB0EE84579B34A7FA0F2DAD3E34BC9B0995B9484` |
 
+The 73 included public cases each identify a developer-written test, repository
+URL, pinned revision, and source hash. Eight cases are natural and retain the
+developer test. The other 65 are controlled challenges intentionally created
+from those tests; the intervention may change test source, the stated scenario,
+or the evidence made available to a verifier. The controlled-injection library
+is at `ThucNgiem/RQ3_Phase2/protocol/controlled_injection_library_v1.md` and
+the frozen public cases and private gold are under the dataset directory above.
+Repository origin alone does not establish the semantic correctness of every
+test or label.
+
 ## Joined prediction/gold records and metric reports
 
 | Model/run | Artifact | SHA-256 |
