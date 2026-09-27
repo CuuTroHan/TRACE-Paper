@@ -34,3 +34,13 @@ Tài liệu này là yêu cầu **rà soát**, không phải xác nhận thay ch
 ## Bổ sung sau phản hồi của Dũng
 
 Dũng xác nhận nhóm chốt nhãn gold cuối qua trao đổi bằng lời nói và không lưu biên bản/bảng duyệt theo từng case. Do đó, câu ở mục 5 rằng hồ sơ ấy “không ở trong workspace” và câu hỏi về khả năng cung cấp ledger ở mục rà soát số 2 đã được làm rõ: hồ sơ viết đó không tồn tại. [Bản thảo hiện tại](../paper/trace-paper.tex) và [RQ3 provenance](../paper/RQ3_PROVENANCE.md) đã được sửa để ghi đúng giới hạn này. Không suy từ các file AI annotation thử nghiệm rằng chúng thay cho quyết định cuối của nhóm; cũng không ghi ngược một biên bản như thể được tạo cùng lúc với quá trình gán nhãn.
+
+### Yêu cầu kiểm chứng bản cập nhật mới nhất
+
+Dũng và nhóm vui lòng đối chiếu [bản thảo LaTeX](../paper/trace-paper.tex), [PDF 28 trang](../paper/trace-paper.pdf), [RQ3 provenance](../paper/RQ3_PROVENANCE.md) và [build record](../paper/BUILD_RECORD.md), rồi phản hồi từng mục sau bằng **đúng / cần sửa** kèm câu chữ đề xuất nếu cần:
+
+1. Bài đã mô tả đúng việc nhóm trao đổi bằng lời nói để chốt gold cuối và không lưu biên bản theo từng case chưa? Có câu nào vô tình ngụ ý rằng một ledger như vậy tồn tại hoặc rằng đã đo được human inter-rater agreement không?
+2. Các nhãn gold, prediction, metric và bốn bảng kết quả RQ3 có được giữ nguyên so với bản Qwen đã chốt không? Lần sửa này chỉ cập nhật phần diễn giải và PDF; bootstrap Qwen đã được chạy lại từ script gốc với 5.000 lần lấy mẫu, seed `20260826`, cho CI `[0; 0,372924]`.
+3. Phần giới hạn nghiên cứu có phản ánh đúng mức bằng chứng của nhóm không: không có biên bản gán nhãn cuối, chưa có holdout độc lập, và Qwen được chọn sau khi xem các run khác? Nếu nhóm muốn kết luận mạnh hơn, xin chỉ rõ bằng chứng hoặc thí nghiệm bổ sung thực sự có, thay vì tạo hồ sơ hồi tố.
+
+Yêu cầu này là kiểm chứng nội dung bản sửa, không phải đề nghị Dũng tạo biên bản gán nhãn cho quá trình đã diễn ra.
