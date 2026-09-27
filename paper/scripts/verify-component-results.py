@@ -11,11 +11,6 @@ from collections import Counter
 from decimal import Decimal
 from pathlib import Path
 
-import numpy as np
-import scipy
-from scipy.stats import binomtest, rankdata, wilcoxon
-
-
 def holm(pvalues):
     order = np.argsort(pvalues)
     adjusted = np.empty(len(order))
@@ -53,8 +48,49 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--workspace", type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--rq3-only-update", action="store_true",
+                        help="Refresh RQ3 in an existing report without unavailable RQ1/RQ2 inputs")
+    parser.add_argument("--rq3-root", type=Path,
+                        help="Root used to record relative RQ3 paths and hashes")
+    parser.add_argument("--rq3-metrics", type=Path, nargs="+",
+                        help="Explicit RQ3 metric reports; excludes every unlisted run")
     args = parser.parse_args()
     hashes = {}
+
+    def refresh_rq3(report, report_hashes):
+        root = (args.rq3_root or args.workspace).resolve()
+        paths = args.rq3_metrics
+        if paths is None:
+            parser.error("Pass the three displayed reports with --rq3-metrics; never glob in excluded GLM")
+        report["rq3"] = []
+        for key in list(report_hashes):
+            if key.startswith("results/rq3/") or key.startswith("HeThong2_ThucNghiem_TongHop/"):
+                del report_hashes[key]
+        for path in paths:
+            path = path.resolve()
+            relative = path.relative_to(root).as_posix()
+            report_hashes[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
+            data = json.loads(path.read_text(encoding="utf-8-sig"))
+            assert data["evaluation_cases"] == 73
+            report["rq3"].append({"path": relative,
+                                  "evaluation_cases": data["evaluation_cases"],
+                                  "metrics": data["metrics"]})
+        report["input_sha256"] = report_hashes
+
+    if args.rq3_only_update:
+        if args.output is None or not args.output.is_file() or args.rq3_metrics is None:
+            parser.error("--rq3-only-update requires an existing --output and --rq3-metrics")
+        output = json.loads(args.output.read_text(encoding="utf-8"))
+        refresh_rq3(output, output["input_sha256"])
+        args.output.write_text(json.dumps(output, indent=2, ensure_ascii=False) + "\n",
+                               encoding="utf-8")
+        print(f"Updated RQ3 in {args.output}; RQ1/RQ2 retained as historical")
+        return
+
+    global np, scipy, binomtest, rankdata, wilcoxon
+    import numpy as np
+    import scipy
+    from scipy.stats import binomtest, rankdata, wilcoxon
 
     def read(relative):
         path = args.workspace / relative
@@ -133,14 +169,7 @@ def main():
     for result, p in zip(tests, holm([r["p"] for r in tests])):
         result["p_holm"] = p
     output["rq2"] = {"summary": stats, "tests": tests, "cost_effect_direction": "TGSLR minus comparator"}
-    output["rq3"] = []
-    for path in sorted((args.workspace / "results/rq3/in_paper").rglob("metrics_v2.json")):
-        relative = str(path.relative_to(args.workspace))
-        hashes[relative] = hashlib.sha256(path.read_bytes()).hexdigest()
-        data = json.loads(path.read_text(encoding="utf-8-sig"))
-        output["rq3"].append({"path": relative, "evaluation_cases": data["evaluation_cases"],
-                               "metrics": data["metrics"]})
-    output["input_sha256"] = hashes
+    refresh_rq3(output, hashes)
     encoded = json.dumps(output, indent=2, ensure_ascii=False) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

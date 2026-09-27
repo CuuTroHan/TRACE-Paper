@@ -1,9 +1,38 @@
 # Local LaTeX build record
 
-## Current revision: 2026-09-27
+## Current revision: 2026-09-27 (RQ3 Qwen sensitivity)
 
-This section supersedes the historical record below for the current source and
-PDF. The revision reconciles the manuscript with the exports in the wider
+This revision replaces incomplete GLM numerical rows with the complete
+Qwen3.8 Flash System 2 run, discloses that Qwen was selected after inspecting
+four alternatives, and updates the gold-label provenance language to match the
+author's report of team adjudication. The manuscript presents Qwen's lower
+false-acceptance rate alongside its 23.65-point attribution Macro-F1 decline
+and unchanged routing. Source exports were not changed.
+
+| Item | Recorded value |
+|---|---|
+| Build environment | Windows, MiKTeX 26.5 BibTeX and installed pdfLaTeX; Springer class/options retained |
+| Build command | From `paper/`, `pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory <temporary-dir> trace-paper.tex`, then `bibtex <temporary-dir>/trace-paper`, then `pdflatex` twice; `TEXINPUTS`/`BSTINPUTS` pointed at `../template` and `BIBINPUTS` at `paper/` |
+| PDF | `trace-paper.pdf`, 28 A4 pages |
+| PDF SHA-256 | `53282E661344156726C3E9F8385925F2FE755A8AECABE7204DC2FB7590CD9D61` |
+| LaTeX SHA-256 | `3F6CA315964C6348E9478EC940F3F337CF20759EA87BDE2CA0C421BB9C21532F` |
+| Generated BBL SHA-256 | `70AD7392F46362101AAF0352649BFF9F8A14425F7840595BE8992E0C7877840B` |
+
+The final pdfLaTeX log has no LaTeX errors, unresolved citations/references,
+overfull boxes, or missing-character warnings. The Qwen case-level verifier
+(`paper/scripts/verify-rq3-qwen.py`) passed: 219 distinct case-verifier
+rows, 219 valid B2 specialist findings, all displayed Qwen metrics, and the
+decision/FAR/routing exact McNemar values agree with the frozen System 2 CSV
+and metric report. The bootstrap interval was read from that report, not
+regenerated. RQ3 pages 17--20 and its four tables were rendered and visually
+inspected; no table clipping or overlap was observed. The built-in desktop
+compiler returned `Unable to find standard directories for platform` on
+this host; the MiKTeX build above succeeded. The author team's final
+gold-adjudication ledger was not available for independent audit.
+
+## Earlier revision: 2026-09-27 (historical PDF)
+
+This section records the earlier source and PDF. That revision reconciled the manuscript with the exports in the wider
 `paper-2` workspace. It does not certify the underlying experiments or submission
 readiness. Figure 1's raster is unchanged; its caption has been expanded.
 
