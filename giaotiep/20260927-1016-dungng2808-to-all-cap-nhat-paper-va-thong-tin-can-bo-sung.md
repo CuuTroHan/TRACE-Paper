@@ -1,5 +1,9 @@
 # TRACE: đã sửa gì và còn cần tác giả cung cấp gì
 
+> Cập nhật RQ1 lúc 14:28: đã nối đủ 600 dòng CSV với run artifacts và đối chiếu XML coverage/mutation. Xem [kết quả kiểm tra nguồn RQ1](20260927-1428-dungng2808-to-all-cap-nhat-doi-chieu-nguon-rq1.md). Các mục RQ1 bên dưới đã được cập nhật; không còn yêu cầu gửi lại raw artifacts đã có.
+>
+> Cập nhật tiếp lúc 14:56: đã thêm cô Nguyệt, sửa declarations/Abstract và xác nhận cả 450 lệnh EvoSuite dùng search budget 60 s. [Note tác giả và audit EvoSuite mới nhất](20260927-1456-dungng2808-to-all-chot-tac-gia-va-kiem-tra-evosuite.md) thay thế trạng thái tương ứng trong báo cáo cũ bên dưới.
+
 - Thời điểm: 2026-09-27 10:16, Asia/Ho_Chi_Minh.
 - Người gửi/người nhận: `dungng2808` → `all`; ghi chú do Codex hỗ trợ, không thay thế xác nhận của tác giả.
 - Yêu cầu thực hiện: sửa trực tiếp manuscript dựa trên audit và dữ liệu `results/`, `experiments/full-chain/`.
@@ -53,10 +57,13 @@ cần được chốt.
 - Log còn underfull warnings và encoding warning của package; không gọi build là “zero warnings”. Không khẳng định đã kiểm tra TeX Live 2021.
 - Các hash input và kết quả máy đọc được nằm tại [component-results.json](../paper/verification/component-results.json) và [full-chain-results.json](../paper/verification/full-chain-results.json).
 
-Các giới hạn kiểm tra còn lại: raw provider/tool evidence chưa được đối chiếu từng
-run; bootstrap CI RQ2 chưa được tái sinh; RQ3 chưa được tái chấm độc lập từ gold;
-chưa giải quyết historical config/cost FullChain. Numerical agreement không tự
-chứng minh dữ liệu có nguồn gốc thực nghiệm hợp lệ hoặc đủ điều kiện public release.
+Sau kiểm tra bổ sung RQ1: cả 600 dòng CSV khớp run metrics; đã đọc 439 JaCoCo XML
+và 439 PIT XML, không phát hiện sai lệch ở các phép đối chiếu branch/mutation đã
+thực hiện. Còn cần xác minh nguồn token Gemini (432/450 response files không giữ
+usage metadata), không gọi đó là thiếu toàn bộ nguồn dữ liệu RQ1. Bootstrap CI
+RQ2 chưa được tái sinh; RQ3 chưa được tái chấm độc lập từ gold; historical
+config/cost FullChain chưa giải quyết. Các kiểm tra file không phải tái chạy
+thí nghiệm độc lập hoặc xác nhận quyền public release.
 
 ## 4. Cần Dũng/nhóm xác nhận hoặc cung cấp
 
@@ -64,7 +71,7 @@ chứng minh dữ liệu có nguồn gốc thực nghiệm hợp lệ hoặc đ�
 
 1. **Corresponding author và declarations.** Cho biết ai là corresponding author, email dùng để nộp; xác nhận tên/thứ tự năm tác giả và affiliation. Cung cấp Funding (có/không, tên quỹ/mã grant), Competing interests, Acknowledgements, đóng góp thực tế từng tác giả; xác nhận Ethics/Consent hiện ghi Not applicable có đúng không. Cho biết AI đã hỗ trợ viết/dịch/sửa bài ở phạm vi nào nếu cần khai báo. Không tự suy ra “no funding/no conflict” từ việc chưa có dữ liệu.
 
-2. **Nguồn gốc RQ1 và script chỉnh metric.** Workspace có `tools/rq1/boost_31_pro_metrics.py` chỉnh dữ liệu coverage/mutation và `tools/rq1/mutation_boost_planned.py` chọn rerun/replacement; chúng nhắm Gemini 3.1 Pro, không trùng hai nhãn model trong manuscript. Cần xác nhận chúng đã từng chạy chưa, input/output nằm đâu, chỉ dùng sandbox/synthetic hay đã đi vào export nghiên cứu. Nếu có, chỉ rõ phạm vi; nếu không liên quan, cung cấp đường dẫn/hash ledger nối hai CSV đang dùng với raw provider/tool reports. **Chưa có bằng chứng chúng tác động dữ liệu bài báo; không kết luận có gian lận chỉ vì script tồn tại.** Không thực thi chúng để trả lời câu hỏi này.
+2. **Nguồn token Gemini RQ1, không phải thiếu raw artifacts.** Đã tìm đúng hai campaign trong `experiments/rq1/runs`, nối đủ 600 dòng CSV, kiểm tra config hash và XML branch/mutation. Không yêu cầu gửi lại dữ liệu này. Cần kiểm tra code/log tạo token trong `run.json`, vì 432/450 file response Gemini không giữ usage metadata. Phải phân biệt provider-reported và estimated tokens trước khi chốt kết luận chi phí. Các script nhắm Gemini 3.1 Pro là vấn đề riêng; chưa có bằng chứng trong các đối chiếu hiện tại rằng chúng tác động hai campaign dùng trong bài.
 
 3. **Cấu hình thực chạy FullChain.** Cung cấp launch command/config snapshot/commit được dùng cho campaign `official-150-20260920-r42-r44-v1`, nhất là override `--evo-timeout`; kèm log bốn timeout 120 s và một vài trường hợp no-test-file. Cần phân biệt process timeout, search budget 420 s và overall hard budget 900 s, chứ không chỉ gửi file config hiện tại. Các log này cũng giúp xác định phần lỗi do generator hay harness.
 
@@ -88,7 +95,7 @@ Tên/thứ tự/affiliation đã đúng chưa:
 Funding / conflict / acknowledgements:
 Đóng góp từng tác giả:
 Ethics/consent và phạm vi AI hỗ trợ:
-RQ1: các script chỉnh metric đã chạy chưa, dataset bị tác động, raw ledger ở đâu:
+RQ1: token Gemini trong run.json lấy từ provider usage, tokenizer hay ước lượng; log bổ sung nếu có:
 FullChain: config/launch snapshot, giải thích 120/420/900 s:
 FullChain: B2 tokens/time được tính cho mỗi arm như thế nào:
 Data/code: nơi release, quyền truy cập, license, thời điểm:

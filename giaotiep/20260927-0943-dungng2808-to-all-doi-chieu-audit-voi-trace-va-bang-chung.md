@@ -1,5 +1,7 @@
 # Đối chiếu audit ngày 25/09 với TRACE và bằng chứng hiện có
 
+> Cập nhật riêng về nguồn RQ1 lúc 14:28: [đã nối 600/600 dòng CSV với run artifacts và kiểm tra XML](20260927-1428-dungng2808-to-all-cap-nhat-doi-chieu-nguon-rq1.md). D05, D09, §4.1 và yêu cầu B2 bên dưới là ghi nhận lịch sử trước kiểm tra bổ sung; không dùng chúng để tiếp tục nói chưa tìm được nguồn RQ1. Còn cần xác minh nguồn token Gemini, không có bằng chứng mới về tác động của script Gemini 3.1 Pro.
+
 > Cập nhật sau kiểm tra: đây là snapshot trước khi sửa manuscript. Xem [bản cập nhật paper và thông tin còn thiếu lúc 10:16](20260927-1016-dungng2808-to-all-cap-nhat-paper-va-thong-tin-can-bo-sung.md) cho trạng thái sau chỉnh sửa; số dòng/hash dưới đây thuộc bản cũ.
 
 - Người gửi/người nhận: `dungng2808` → `all`; ghi chú do Codex hỗ trợ kiểm tra theo yêu cầu của Dũng, chưa phải xác nhận của toàn bộ tác giả.
@@ -142,6 +144,8 @@ F03, các declaration liên quan và chất lượng hình là vấn đề thự
 Nên dùng thêm cột “bắt buộc theo journal / xác nhận tác giả / bổ sung bằng chứng / cải thiện biên tập” thay vì diễn giải mọi nhãn P0 là desk-reject chắc chắn.
 
 ### D09 — Cần xác nhận tách biệt script thay đổi báo cáo đo khỏi dữ liệu nghiên cứu chính thức
+
+> Trạng thái sau đối chiếu: mô tả hành vi script dưới đây được giữ làm lịch sử kiểm tra code, không phải kết luận rằng hai CSV trong bài bị tác động. Raw artifacts của hai campaign đã được tìm và đối chiếu; yêu cầu gửi lại raw RQ1 đã được thay thế bằng cập nhật 14:28 ở đầu file.
 
 Trong khi tìm script phân tích, phát hiện [boost_31_pro_metrics.py](../../tools/rq1/boost_31_pro_metrics.py). Đọc source cho thấy script nhắm vào `experiments/rq1/runs/RQ1-OFFICIAL-GEMINI-3.1-PRO`, sửa các counter JaCoCo từ missed sang covered (dòng 34–47) và đổi ngẫu nhiên một phần mutation status `SURVIVED`/`NO_COVERAGE` thành `KILLED` (dòng 49–59). Đây là thay đổi trực tiếp measurement report, không phải kết quả đo lại coverage/mutation bằng công cụ.
 

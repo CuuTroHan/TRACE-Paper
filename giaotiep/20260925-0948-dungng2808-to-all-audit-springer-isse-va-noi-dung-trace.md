@@ -1,6 +1,6 @@
 # Audit định dạng Springer/ISSE và nội dung nghiên cứu của TRACE
 
-> **Ghi chú kiểm tra lại ngày 2026-09-27:** Source/PDF/bibliography/Figure 1 vẫn khớp các hash trong báo cáo này. Tuy nhiên, một số cách diễn đạt và kết luận về dữ liệu cần cập nhật. Xem [bản đối chiếu chi tiết, các điểm cần sửa và thông tin cần tác giả cung cấp](20260927-0943-dungng2808-to-all-doi-chieu-audit-voi-trace-va-bang-chung.md). Nội dung bên dưới được giữ như bản audit lịch sử ngày 2026-09-25; đặc biệt không dùng nhận định “thiếu compilation/time của RQ2” hoặc “chưa có artifact” như kết luận chung cho toàn workspace.
+> **Ghi chú kiểm tra lại ngày 2026-09-27:** Trước lần sửa manuscript ngày 27/09, source/PDF/bibliography/Figure 1 khớp các hash trong báo cáo này; hash source/PDF đó không còn mô tả bản đã sửa. Xem [bản đối chiếu chi tiết](20260927-0943-dungng2808-to-all-doi-chieu-audit-voi-trace-va-bang-chung.md) và [cập nhật nguồn RQ1: đã nối 600 run và đối chiếu XML](20260927-1428-dungng2808-to-all-cap-nhat-doi-chieu-nguon-rq1.md). Nội dung bên dưới được giữ như audit lịch sử ngày 2026-09-25; không dùng nhận định “thiếu compilation/time của RQ2” hoặc “chưa có artifact” làm kết luận hiện tại cho toàn workspace.
 
 - **Người gửi:** `dungng2808`
 - **Người nhận:** `all`
